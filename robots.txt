@@ -1,0 +1,8 @@
+# Crawl freely. The wall is public and the names are meant to be read.
+
+User-agent: *
+Allow: /
+
+# There is no sitemap. There is one page and a 404.
+# Please index respectfully; the fallen were indexed once already,
+# as the first through fourteenth of September.

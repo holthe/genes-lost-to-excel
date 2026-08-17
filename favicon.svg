@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>Memorial for the Genes Lost to Excel</title>
+  <rect width="64" height="64" fill="#101114"/>
+  <g stroke="#c3ab77" fill="none">
+    <rect x="9" y="17" width="46" height="30" rx="1.5" stroke-width="3"/>
+    <line x1="9" y1="26.5" x2="55" y2="26.5" stroke-width="2.5"/>
+    <line x1="26" y1="17" x2="26" y2="47" stroke-width="2.5"/>
+  </g>
+  <rect x="28" y="32" width="25" height="13" fill="#b3985a"/>
+</svg>
