@@ -212,11 +212,10 @@ Until then the site is reachable at `geneslosttoexcel.pages.dev`.
 
 The memorial is maintained by
 [Best Effort Industries](https://besteffortindustries.com) and is
-registered as division 015 in the operating divisions table in that
-repository's `index.html`. The site footer's document number, BEI-011,
-predates the registration and does not match; the Commission responsible
-for document numbering could not be reached, because it is a different
-division.
+currently queued in that register's Schedule B under a provisional
+number. Real division numbers are assigned by the register on entry into
+service and are recorded nowhere else; this site, of all sites, knows
+what happens to identifiers that get copied into a second document.
 
 ## License
 
