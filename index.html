@@ -103,14 +103,18 @@
 
   .goldrule,.stars,.stonediv{display:none}
   .wall h3{grid-column:2/5;font-size:12px;letter-spacing:.3em;color:var(--green);text-transform:uppercase;font-weight:700;margin-top:28px}
-  .stanza{grid-column:2/9;padding:14px 16px 16px}
-  .fam{font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;font-weight:700}
-  .inscr{margin-top:10px;display:flex;flex-wrap:wrap;border:2px solid var(--sel);background:rgba(33,115,70,.05);
-    width:fit-content;max-width:100%;position:relative}
-  .inscr:after{content:"";position:absolute;right:-5px;bottom:-5px;width:8px;height:8px;background:var(--sel);border:1px solid #fff}
-  .cellname{display:block;padding:5px 14px;border-right:1px solid var(--grid);border-bottom:1px solid var(--grid);
-    font-family:Consolas,ui-monospace,monospace;font-size:14px;background:#fff;min-width:104px;text-align:center}
-  .stanza .note{margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic;max-width:640px;line-height:1.6}
+  .stanza{display:contents}
+  .fam{grid-column:2/6;font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;font-weight:700;
+    background:#fff;border:1px solid var(--grid);padding:6px 16px;position:relative;z-index:1;margin-top:18px}
+  .inscr{grid-column:2/-1;display:grid;grid-template-columns:subgrid;position:relative;z-index:1;
+    outline:2px solid var(--sel);outline-offset:-1px}
+  .inscr.solo{grid-column:2/3}
+  .inscr:after{content:"";position:absolute;right:-4px;bottom:-4px;width:8px;height:8px;background:var(--sel);border:1px solid #fff}
+  .cellname{padding:6px 8px;border-right:1px solid var(--grid);border-bottom:1px solid var(--grid);
+    font-family:Consolas,ui-monospace,monospace;font-size:14px;background:#fff;text-align:center;min-width:0;
+    overflow:hidden;text-overflow:ellipsis}
+  .stanza .note,.note{grid-column:2/8;font-size:12.5px;color:var(--muted);font-style:italic;line-height:1.6;
+    background:#fff;border:1px solid var(--grid);padding:6px 16px;position:relative;z-index:1}
   .facts-row{grid-column:2/9;margin-top:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:0;background:#fff}
   .facts-row div{padding:12px 16px;border-right:1px solid var(--grid)}
   .facts-row div:last-child{border-right:0}
@@ -161,7 +165,8 @@
     .xl-cols{grid-template-columns:var(--gut) repeat(4,minmax(0,1fr))}
     .xl-cols span:nth-child(n+6){display:none}
     .sheet .eyebrow,.sheet h1,.sheet .sub,.sheet .ded p,.sheet h2,.sheet p.intro,
-    .sheet .wall h3,.sheet .stanza,.sheet .facts-row,.sheet .wall .foot,.sheet .facts p,.checker{grid-column:2/-1}
+    .sheet .wall h3,.sheet .fam,.sheet .note,.sheet .facts-row,.sheet .wall .foot,.sheet .facts p,.checker{grid-column:2/-1}
+    .cellname{font-size:12.5px;padding:6px 4px}
     .eyebrow,section .eyebrow{margin-top:40px}
     .facts-row{grid-template-columns:repeat(2,minmax(0,1fr))}
     .facts-row div:nth-child(2n){border-right:0}
@@ -222,7 +227,7 @@
 
       <div class="stanza">
         <div class="fam">DEC · one symbol</div>
-        <div class="inscr"><span class="cellname">DEC1</span></div>
+        <div class="inscr solo"><span class="cellname">DEC1</span></div>
         <p class="note">Read as the first of December. The only member of its family, renamed DELEC1. It fell alone and is remembered alone.</p>
       </div>
 
