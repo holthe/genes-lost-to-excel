@@ -71,11 +71,12 @@
 
   /* ---- the sheet: a real grid; cells are the content ---- */
   .sheet{--ncols:8;--row:28px;display:grid;grid-template-columns:var(--gut) repeat(8,minmax(0,1fr));
-    grid-auto-rows:var(--row);align-items:stretch;position:relative;
+    grid-auto-rows:minmax(var(--row),auto);align-items:stretch;position:relative;
     background:
       linear-gradient(90deg,#f8f9fa var(--gut),transparent var(--gut)),
       repeating-linear-gradient(180deg,transparent 0 27px,var(--grid) 27px 28px);
     padding-bottom:56px}
+  .sheet.lattice{grid-auto-rows:var(--row)}
   .sheet > .vl{position:absolute;top:0;bottom:0;width:1px;pointer-events:none;background:var(--grid);
     left:calc(var(--gut) + var(--k)*((100% - var(--gut))/var(--ncols)) - 1px)}
   .sheet > .vl.vg{background:#cfd4d9;left:calc(var(--gut) - 1px)}
@@ -304,25 +305,27 @@
     '.eyebrow, h1, .sub, .ded p, h2, p.intro, .wall h3, .fam, .inscr, .note, .facts-row, .wall .foot, .facts p, .checker'
   ));
   function lay(){
-    items.forEach(function(el){ el.style.gridRow = 'span 1'; });
-    items.map(function(el){
+    sheet.classList.add('lattice');
+    /* Measure each block at its natural height: give it a row area far larger
+       than it needs and stop it stretching, so the box reports its own size.
+       Then snap it back to a whole number of rows. */
+    items.forEach(function(el){ el.style.gridRow = 'span 40'; el.style.alignSelf = 'start'; });
+    var heights = items.map(function(el){
       var cs = getComputedStyle(el);
-      var mt = parseFloat(cs.marginTop) || 0;
-      var mb = parseFloat(cs.marginBottom) || 0;
-      var bw = (parseFloat(cs.borderTopWidth) || 0) + (parseFloat(cs.borderBottomWidth) || 0);
-      var h = Math.max(el.scrollHeight + bw, el.getBoundingClientRect().height);
-      return [el, h + mt + mb];
-    }).forEach(function(pair){
-      var el = pair[0], span;
+      return el.getBoundingClientRect().height
+           + (parseFloat(cs.marginTop) || 0) + (parseFloat(cs.marginBottom) || 0);
+    });
+    items.forEach(function(el, i){
+      el.style.alignSelf = '';
+      var span;
       if (el.classList.contains('inscr')) {
-        /* a range is exactly as tall as its rows of cells */
         var cells = el.querySelectorAll('.cellname').length;
         var cols = el.classList.contains('solo') ? 1
                  : (parseInt(getComputedStyle(sheet).getPropertyValue('--ncols'), 10) || 8);
         span = Math.max(1, Math.ceil(cells / cols));
       } else {
-        var h = pair[1], whole = Math.floor(h / R), rem = h - whole * R;
-        span = Math.max(1, whole + (rem > 3 ? 1 : 0));
+        var h = heights[i], whole = Math.floor(h / R), rem = h - whole * R;
+        span = Math.max(1, whole + (rem > 1.5 ? 1 : 0));
       }
       el.style.gridRow = 'span ' + span;
     });
