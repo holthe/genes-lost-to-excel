@@ -70,8 +70,8 @@
   .xl-cols span{text-align:center;border-right:1px solid #dfe3e7;padding:3px 0;min-width:0}
 
   /* ---- the sheet: a real grid; cells are the content ---- */
-  .sheet{--ncols:8;display:grid;grid-template-columns:var(--gut) repeat(8,minmax(0,1fr));
-    align-items:start;position:relative;
+  .sheet{--ncols:8;--row:28px;display:grid;grid-template-columns:var(--gut) repeat(8,minmax(0,1fr));
+    grid-auto-rows:var(--row);align-items:stretch;position:relative;
     background:
       linear-gradient(90deg,#f8f9fa var(--gut),transparent var(--gut)),
       repeating-linear-gradient(180deg,transparent 0 27px,var(--grid) 27px 28px);
@@ -84,11 +84,11 @@
   /* every content block is a cell range on the tracks */
   .sheet .eyebrow,.sheet h1,.sheet .sub,.sheet .ded p,.sheet h2,.sheet p.intro,
   .sheet .wall h3,.sheet .stanza,.sheet .facts-row,.sheet .wall .foot,.sheet .facts p{
-    background:#fff;border:1px solid var(--grid);padding:6px 16px;min-width:0;position:relative;z-index:1}
+    background:#fff;border:1px solid var(--grid);border-top:0;padding:5px 16px;min-width:0;position:relative;z-index:1}
   .checker{position:relative;z-index:1}
 
   .eyebrow{grid-column:2/5;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700;
-    margin-top:56px}
+    margin-top:56px;display:flex;align-items:center}
   header h1{grid-column:2/8;justify-self:start;font-size:clamp(22px,4vw,34px);font-weight:700;letter-spacing:-.01em;line-height:1.25;
     border:2px solid var(--sel);padding:10px 18px 12px;position:relative;box-shadow:0 2px 8px rgba(33,115,70,.15)}
   header h1:after{content:"";position:absolute;right:-5px;bottom:-5px;width:8px;height:8px;background:var(--sel);border:1px solid #fff}
@@ -99,23 +99,27 @@
 
   section h2{grid-column:2/6;font-size:19px;font-weight:700}
   section .eyebrow{margin-top:56px}
+  .sheet>*{margin-bottom:0}
   section p.intro{grid-column:2/7;color:var(--muted)}
 
   .goldrule,.stars,.stonediv{display:none}
-  .wall h3{grid-column:2/5;font-size:12px;letter-spacing:.3em;color:var(--green);text-transform:uppercase;font-weight:700;margin-top:28px}
+  .wall h3{grid-column:2/5;font-size:12px;letter-spacing:.3em;color:var(--green);text-transform:uppercase;font-weight:700;
+    margin-top:28px;display:flex;align-items:center}
   .stanza{display:contents}
   .fam{grid-column:2/6;font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;font-weight:700;
-    background:#fff;border:1px solid var(--grid);padding:6px 16px;position:relative;z-index:1;margin-top:18px}
-  .inscr{grid-column:2/-1;display:grid;grid-template-columns:subgrid;position:relative;z-index:1;
+    background:#fff;border:1px solid var(--grid);border-top:0;padding:5px 16px;position:relative;z-index:1;margin-top:28px;
+    display:flex;align-items:center}
+  .inscr{grid-column:2/-1;display:grid;grid-template-columns:subgrid;grid-auto-rows:var(--row);position:relative;z-index:1;
     outline:2px solid var(--sel);outline-offset:-1px}
   .inscr.solo{grid-column:2/3}
   .inscr:after{content:"";position:absolute;right:-4px;bottom:-4px;width:8px;height:8px;background:var(--sel);border:1px solid #fff}
-  .cellname{padding:6px 8px;border-right:1px solid var(--grid);border-bottom:1px solid var(--grid);
+  .cellname{display:flex;align-items:center;justify-content:center;padding:0 8px;
+    border-right:1px solid var(--grid);border-bottom:1px solid var(--grid);
     font-family:Consolas,ui-monospace,monospace;font-size:14px;background:#fff;text-align:center;min-width:0;
-    overflow:hidden;text-overflow:ellipsis}
+    overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
   .stanza .note,.note{grid-column:2/8;font-size:12.5px;color:var(--muted);font-style:italic;line-height:1.6;
     background:#fff;border:1px solid var(--grid);padding:6px 16px;position:relative;z-index:1}
-  .facts-row{grid-column:2/9;margin-top:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:0;background:#fff}
+  .facts-row{grid-column:2/9;margin-top:28px;align-self:stretch;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:0;background:#fff}
   .facts-row div{padding:12px 16px;border-right:1px solid var(--grid)}
   .facts-row div:last-child{border-right:0}
   .facts-row div b{display:block;font-size:22px;color:var(--green);font-weight:700}
@@ -123,7 +127,7 @@
   .wall .foot{grid-column:2/8;font-size:12.5px;color:var(--muted);font-style:italic;line-height:1.6}
 
   /* the checker: a floating dialog, deliberately off-grid */
-  .checker{grid-column:2/7;justify-self:start;min-width:min(100%,560px);margin:20px 0 40px;background:var(--chrome);border:1px solid #c7c5c0;
+  .checker{grid-column:2/7;justify-self:start;align-self:start;min-width:min(100%,560px);margin:28px 0 56px;background:var(--chrome);border:1px solid #c7c5c0;
     box-shadow:0 12px 34px rgba(0,0,0,.18);padding:0}
   .checker:before{content:"Paste Special\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00d7";
     display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid var(--chrome-line);
@@ -166,7 +170,7 @@
     .xl-cols span:nth-child(n+6){display:none}
     .sheet .eyebrow,.sheet h1,.sheet .sub,.sheet .ded p,.sheet h2,.sheet p.intro,
     .sheet .wall h3,.sheet .fam,.sheet .note,.sheet .facts-row,.sheet .wall .foot,.sheet .facts p,.checker{grid-column:2/-1}
-    .cellname{font-size:12.5px;padding:6px 4px}
+    .cellname{font-size:12.5px;padding:0 4px}
     .eyebrow,section .eyebrow{margin-top:40px}
     .facts-row{grid-template-columns:repeat(2,minmax(0,1fr))}
     .facts-row div:nth-child(2n){border-right:0}
@@ -286,6 +290,47 @@
 </footer>
 
 <script>
+/* The sheet is a lattice: every block occupies a whole number of 28px rows,
+   so its borders land on the painted row lines instead of slicing them.
+   Row tracks are fixed, so a block's own box is clamped; its true height is
+   read from scrollHeight and the margin that offsets it. */
+(function(){
+  var sheet = document.querySelector('.sheet');
+  if(!sheet || !sheet.children.length) return;
+  var R = 28;
+  var items = Array.prototype.slice.call(sheet.querySelectorAll(
+    '.eyebrow, h1, .sub, .ded p, h2, p.intro, .wall h3, .fam, .inscr, .note, .facts-row, .wall .foot, .facts p, .checker'
+  ));
+  function lay(){
+    items.forEach(function(el){ el.style.gridRow = 'span 1'; });
+    items.map(function(el){
+      var cs = getComputedStyle(el);
+      var mt = parseFloat(cs.marginTop) || 0;
+      var mb = parseFloat(cs.marginBottom) || 0;
+      var bw = (parseFloat(cs.borderTopWidth) || 0) + (parseFloat(cs.borderBottomWidth) || 0);
+      var h = Math.max(el.scrollHeight + bw, el.getBoundingClientRect().height);
+      return [el, h + mt + mb];
+    }).forEach(function(pair){
+      var el = pair[0], span;
+      if (el.classList.contains('inscr')) {
+        /* a range is exactly as tall as its rows of cells */
+        var cells = el.querySelectorAll('.cellname').length;
+        var cols = el.classList.contains('solo') ? 1
+                 : (parseInt(getComputedStyle(sheet).getPropertyValue('--ncols'), 10) || 8);
+        span = Math.max(1, Math.ceil(cells / cols));
+      } else {
+        var h = pair[1], whole = Math.floor(h / R), rem = h - whole * R;
+        span = Math.max(1, whole + (rem > 3 ? 1 : 0));
+      }
+      el.style.gridRow = 'span ' + span;
+    });
+  }
+  lay();
+  window.addEventListener('load', lay);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(lay);
+  var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(lay, 120); });
+})();
+
 (function(){
   var MONTHS = {JAN:'January',FEB:'February',MAR:'March',APR:'April',MAY:'May',JUN:'June',JUL:'July',AUG:'August',SEP:'September',OCT:'October',NOV:'November',DEC:'December'};
 
