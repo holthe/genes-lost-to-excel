@@ -11,7 +11,7 @@
      below and the footer of tools/og.html, then re-run `make og`. Those are
      the only two files that name it; nothing derives it. -->
 <link rel="canonical" href="https://geneslosttoexcel.org/">
-<meta name="theme-color" content="#101114">
+<meta name="theme-color" content="#e2ded4">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
@@ -38,68 +38,80 @@
 
 <style>
   :root{
-    --black:#101114; --stone:#1a1c21; --stone-lt:#24262d; --text:#d9d6cd;
-    --gold:#b3985a; --muted:#8a8779; --line:#33353c; --safe:#5f9e6e; --lost:#c96a5a;
+    --stone:#e2ded4; --stone-hi:#eae7df; --ink:#3d4249; --engrave:#575c63;
+    --gilt:#9c7f42; --gilt-hi:#b5985c; --muted:#767b80; --line:#c2bcab;
+    --plaque:#253649; --plaque-frame:#ece6d6; --cream:#e9e3d3;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--black);color:var(--text);font-family:Georgia,"Times New Roman",serif;line-height:1.65}
+  body{color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65;
+    background:var(--stone) linear-gradient(180deg,var(--stone-hi),var(--stone) 340px)}
   .wrap{max-width:860px;margin:0 auto;padding:0 22px}
-  .eyebrow{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
-  a{color:var(--gold)}
+  .eyebrow{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gilt);font-weight:700}
+  a{color:var(--gilt)}
+  button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--gilt);outline-offset:2px}
   .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
-  button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 
-  header{text-align:center;padding:64px 0 50px;border-bottom:1px solid var(--gold)}
-  header h1{font-size:clamp(26px,5.4vw,42px);font-weight:400;margin-top:14px}
-  .emblem{width:min(330px,78vw);height:auto;display:block;margin:18px auto 2px;mix-blend-mode:lighten}
-  header .sub{margin-top:12px;color:var(--muted);font-style:italic;max-width:520px;margin-left:auto;margin-right:auto}
+  /* engraved-into-stone type */
+  header h1,section h2,.ded p,.wall h3,.fam,.stanza .note,.facts p,footer p,section p.intro{
+    text-shadow:0 1px 0 rgba(255,255,255,.55)}
 
-  .ded{padding:44px 0;border-bottom:1px solid var(--line);text-align:center}
-  .ded p{max-width:600px;margin:0 auto;font-size:17px}
+  header{text-align:center;padding:72px 0 54px;border-bottom:1px solid var(--line)}
+  header h1{font-size:clamp(28px,5.4vw,46px);font-weight:400;margin-top:16px;letter-spacing:.02em}
+  header .sub{margin-top:14px;color:var(--muted);font-style:italic;max-width:540px;margin-left:auto;margin-right:auto}
+  .hstar{width:26px;height:26px;margin:22px auto 0;display:block;fill:var(--gilt)}
+
+  .ded{padding:46px 0;border-bottom:1px solid var(--line);text-align:center}
+  .ded p{max-width:600px;margin:0 auto;font-size:17.5px}
   .ded p + p{margin-top:14px;color:var(--muted);font-size:15px}
 
-  section{padding:48px 0;border-bottom:1px solid var(--line)}
-  section h2{font-weight:400;font-size:26px;margin:6px 0 10px}
+  section{padding:50px 0;border-bottom:1px solid var(--line)}
+  section h2{font-weight:400;font-size:27px;margin:6px 0 10px}
   section p.intro{color:var(--muted);max-width:620px}
 
-  .wall{margin-top:26px;position:relative;border:1px solid #3a3428;outline:1px solid #26241e;outline-offset:6px;padding:44px 40px 34px;text-align:center;
-    background:
-      radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.05), transparent 60%),
-      radial-gradient(100% 100% at 50% 115%, rgba(0,0,0,.6), transparent 62%),
-      linear-gradient(180deg,#1c1e23,#131418);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.05), inset 0 0 90px rgba(0,0,0,.65)}
-  .wall h3{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:400;font-size:10px;letter-spacing:.32em;color:var(--gold);text-transform:uppercase}
-  .goldrule{display:flex;align-items:center;justify-content:center;gap:12px;margin:12px 0 0}
-  .goldrule i{display:block;height:1px;width:80px;background:linear-gradient(90deg,transparent,rgba(201,179,128,.5))}
-  .goldrule i+i{background:linear-gradient(90deg,rgba(201,179,128,.5),transparent)}
-  .goldrule b{width:5px;height:5px;background:rgba(201,179,128,.65);transform:rotate(45deg)}
-  .stanza{margin-top:34px}
+  /* the wall panel: a slab within the wall */
+  .wall{margin-top:28px;position:relative;padding:48px 40px 38px;text-align:center;
+    background:var(--stone-hi);border:1px solid var(--line);
+    box-shadow:inset 0 1px 4px rgba(0,0,0,.08), inset 0 0 0 6px var(--stone-hi), inset 0 0 0 7px var(--line)}
+  .wall h3{font-family:Georgia,serif;font-weight:400;font-size:15px;letter-spacing:.42em;color:var(--ink);text-transform:uppercase}
+  .goldrule{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 0}
+  .goldrule i{display:block;height:1px;width:90px;background:linear-gradient(90deg,transparent,rgba(156,127,66,.55))}
+  .goldrule i+i{background:linear-gradient(90deg,rgba(156,127,66,.55),transparent)}
+  .goldrule b{width:5px;height:5px;background:rgba(156,127,66,.7);transform:rotate(45deg)}
+
+  .stars{margin:30px auto 4px;max-width:400px;line-height:1.9;letter-spacing:.55em;text-indent:.55em;
+    color:var(--gilt);font-size:19px;text-shadow:0 -1px 0 rgba(0,0,0,.18), 0 1px 0 rgba(255,255,255,.5)}
+
+  .stanza{margin-top:36px}
   .stanza:first-of-type{margin-top:30px}
-  .fam{font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.3em;color:#7f7c70;text-transform:uppercase}
-  .inscr{margin-top:13px;font-size:17px;letter-spacing:.16em;line-height:2;color:#c3ab77;
-    text-shadow:0 -1px 0 rgba(0,0,0,.95),0 1px 1px rgba(255,255,255,.07)}
-  .inscr span{color:rgba(201,179,128,.4);padding:0 .1em}
+  .fam{font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase}
+  .inscr{margin-top:13px;font-size:17px;letter-spacing:.16em;line-height:2;color:var(--gilt);
+    text-shadow:0 -1px 0 rgba(0,0,0,.22), 0 1px 0 rgba(255,255,255,.55)}
+  .inscr span{color:rgba(156,127,66,.45);padding:0 .1em}
   .stanza .note{margin-top:11px;font-size:12.5px;color:var(--muted);font-style:italic;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.65}
-  .stonediv{margin:34px auto 0;width:130px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,179,128,.28),transparent)}
-  .facts-row{margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px 10px;padding-top:28px;border-top:1px solid rgba(201,179,128,.18)}
-  .facts-row div b{display:block;font-size:23px;color:#c3ab77;font-family:Georgia,serif;text-shadow:0 -1px 0 rgba(0,0,0,.9)}
-  .facts-row div span{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#7a776b;margin-top:6px;line-height:1.5}
+  .stonediv{margin:34px auto 0;width:130px;height:1px;background:linear-gradient(90deg,transparent,rgba(156,127,66,.35),transparent)}
+  .facts-row{margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px 10px;padding-top:28px;border-top:1px solid var(--line)}
+  .facts-row div b{display:block;font-size:23px;color:var(--gilt);font-family:Georgia,serif;
+    text-shadow:0 -1px 0 rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.5)}
+  .facts-row div span{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:6px;line-height:1.5}
   .wall .foot{margin-top:30px;font-size:12.5px;color:var(--muted);font-style:italic;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7}
 
-  .checker{margin-top:26px;background:var(--stone);border:1px solid var(--line);padding:26px}
-  .checker label{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  /* the checker: a mounted bronze plaque */
+  .checker{margin-top:30px;background:var(--plaque);color:var(--cream);padding:30px 28px;max-width:680px;
+    border:10px solid var(--plaque-frame);outline:1px solid var(--line);
+    box-shadow:0 16px 34px rgba(40,40,35,.35), inset 0 0 0 1px rgba(233,227,211,.35)}
+  .checker label{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#b8c0c9;margin-bottom:8px}
   .row{display:flex;gap:10px;flex-wrap:wrap}
-  input[type=text]{flex:1;min-width:200px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:16px;padding:11px 13px;background:#0d0e11;border:1px solid var(--line);color:var(--text)}
-  button{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:#101114;border:0;padding:12px 24px;cursor:pointer}
-  button:hover{background:#cbb06d}
-  .fate-card{margin-top:18px;padding:18px;border-left:4px solid;display:none;background:#0d0e11;font-size:15px}
-  .fate-card.safe{border-color:var(--safe);display:block}
-  .fate-card.lost{border-color:var(--lost);display:block}
+  input[type=text]{flex:1;min-width:200px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:16px;padding:11px 13px;background:#1b2a3b;border:1px solid #3c4f66;color:var(--cream)}
+  button{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(180deg,var(--gilt-hi),var(--gilt));color:#241c08;border:1px solid #7a6232;padding:12px 24px;cursor:pointer}
+  button:hover{background:linear-gradient(180deg,#c4a86c,var(--gilt))}
+  .fate-card{margin-top:18px;padding:18px;border-left:4px solid;display:none;background:#1b2a3b;font-size:15px}
+  .fate-card.safe{border-color:#5f9e6e;display:block}
+  .fate-card.lost{border-color:#c96a5a;display:block}
   .fate-card b{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
   .fate-card .as{font-size:22px;margin:6px 0}
-  .fate-card p{color:var(--muted);font-size:13.5px;font-style:italic}
+  .fate-card p{color:#aab3bd;font-size:13.5px;font-style:italic}
 
-  .facts p{max-width:640px;color:var(--text);font-size:15.5px;margin-top:12px}
+  .facts p{max-width:640px;color:var(--ink);font-size:15.5px;margin-top:12px}
   .facts p:first-of-type{margin-top:0}
   .facts .src{color:var(--muted);font-size:13px;font-style:italic}
 
@@ -113,61 +125,7 @@
 <header>
   <div class="wrap">
     <div class="eyebrow">Sites of Remembrance</div>
-    <svg class="emblem" viewBox="0 0 340 310" role="img" aria-label="Memorial crest: a spreadsheet-grid shield flanked by two DNA helices, above a ribbon reading Autoformatted, Not Forgotten">
-      <g fill="none" stroke="#b3985a">
-        <line x1="70" y1="21" x2="122" y2="21" stroke-width=".8" opacity=".55"/>
-        <line x1="218" y1="21" x2="270" y2="21" stroke-width=".8" opacity=".55"/>
-      </g>
-      <rect x="166.5" y="17.5" width="7" height="7" transform="rotate(45 170 21)" fill="#b3985a" opacity=".0"/>
-      <text x="170" y="25" text-anchor="middle" font-family="Georgia,serif" font-size="12" letter-spacing="4" fill="#c3ab77">IN MEMORIAM</text>
-
-      <!-- shield: a spreadsheet, at rest -->
-      <path d="M104 48 H236 V138 C236 180 204 206 170 220 C136 206 104 180 104 138 Z"
-            fill="rgba(179,152,90,.06)" stroke="#b3985a" stroke-width="2"/>
-      <path d="M110 54 H230 V137 C230 175 201 199 170 212.5 C139 199 110 175 110 137 Z"
-            fill="none" stroke="#8a744a" stroke-width=".8"/>
-      <!-- header row with column letters -->
-      <line x1="110" y1="76" x2="230" y2="76" stroke="#b3985a" stroke-width="1"/>
-      <g font-family="Georgia,serif" font-size="11" fill="#c3ab77" text-anchor="middle">
-        <text x="130" y="69">A</text><text x="170" y="69">B</text><text x="210" y="69">C</text>
-      </g>
-      <!-- grid -->
-      <g stroke="#8a744a" stroke-width=".8">
-        <line x1="150" y1="54" x2="150" y2="203"/>
-        <line x1="190" y1="54" x2="190" y2="203"/>
-        <line x1="110" y1="104" x2="230" y2="104"/>
-        <line x1="110" y1="132" x2="230" y2="132"/>
-        <line x1="112" y1="160" x2="228" y2="160"/>
-      </g>
-      <!-- the fallen cell -->
-      <rect x="150" y="104" width="40" height="28" fill="#b3985a"/>
-
-      <!-- DNA supporters -->
-      <g id="helix" stroke-linecap="round" fill="none">
-        <g stroke="#8a744a" stroke-width=".8">
-          <line x1="46" y1="66" x2="70" y2="66"/>
-          <line x1="50" y1="78" x2="66" y2="78"/>
-          <line x1="44" y1="115" x2="72" y2="115"/>
-          <line x1="50" y1="103" x2="66" y2="103"/>
-          <line x1="50" y1="127" x2="66" y2="127"/>
-          <line x1="46" y1="164" x2="70" y2="164"/>
-          <line x1="50" y1="152" x2="66" y2="152"/>
-          <line x1="50" y1="188" x2="66" y2="188"/>
-          <line x1="46" y1="176" x2="70" y2="176"/>
-        </g>
-        <path d="M42 55 C58 72 58 98 74 115 C58 132 58 158 42 175 C58 192 58 218 74 235" stroke="#b3985a" stroke-width="1.7"/>
-        <path d="M74 55 C58 72 58 98 42 115 C58 132 58 158 74 175 C58 192 58 218 42 235" stroke="#8a744a" stroke-width="1.4"/>
-      </g>
-      <use href="#helix" transform="translate(340 0) scale(-1 1)"/>
-
-      <!-- ribbon -->
-      <path d="M100 246 L68 240 L78 258 L68 276 L100 270 Z" fill="rgba(179,152,90,.08)" stroke="#8a744a" stroke-width="1.2"/>
-      <path d="M240 246 L272 240 L262 258 L272 276 L240 270 Z" fill="rgba(179,152,90,.08)" stroke="#8a744a" stroke-width="1.2"/>
-      <path d="M94 244 H246 L241 272 H99 Z" fill="rgba(179,152,90,.1)" stroke="#b3985a" stroke-width="1.5"/>
-      <text x="170" y="261.5" text-anchor="middle" font-family="Georgia,serif" font-size="8.6" letter-spacing="1.1" fill="#c3ab77">AUTOFORMATTED, NOT FORGOTTEN</text>
-
-      <rect x="166.5" y="286.5" width="7" height="7" transform="rotate(45 170 290)" fill="#b3985a" opacity=".65"/>
-    </svg>
+    <svg class="hstar" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.6 L14.7 8.9 L22.5 9.2 L16.4 14 L18.5 21.5 L12 17.2 L5.5 21.5 L7.6 14 L1.5 9.2 L9.3 8.9 Z"/></svg>
     <h1>Memorial for the Genes Lost to Excel</h1>
     <div class="sub">In memory of the gene symbols converted to dates, and in honor of the scientists who, after two decades, chose the only winning move: surrender.</div>
   </div>
@@ -188,6 +146,7 @@
     <div class="wall">
       <h3>In memoriam</h3>
       <div class="goldrule" aria-hidden="true"><i></i><b></b><i></i></div>
+      <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;</div>
 
       <div class="stanza">
         <div class="fam">The SEPT family · fourteen symbols</div>
