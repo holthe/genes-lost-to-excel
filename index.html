@@ -11,7 +11,7 @@
      below and the footer of tools/og.html, then re-run `make og`. Those are
      the only two files that name it; nothing derives it. -->
 <link rel="canonical" href="https://geneslosttoexcel.org/">
-<meta name="theme-color" content="#e2ded4">
+<meta name="theme-color" content="#185c37">
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
@@ -38,113 +38,139 @@
 
 <style>
   :root{
-    --stone:#e2ded4; --stone-hi:#eae7df; --ink:#3d4249; --engrave:#575c63;
-    --gilt:#9c7f42; --gilt-hi:#b5985c; --muted:#767b80; --line:#c2bcab;
-    --plaque:#253649; --plaque-frame:#ece6d6; --cream:#e9e3d3;
-    --granite:#131417; --granite-hi:#1e2025; --gilt-bright:#d1b878; --granite-muted:#93907f;
+    --green:#217346; --green-dk:#185c37; --ink:#232629; --muted:#6a6f74;
+    --grid:#e4e7ea; --chrome:#f5f4f2; --chrome-line:#e0deda; --sel:#217346;
+    --cell:#ffffff; --lost:#c0392b; --safe:#2e7d43;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65;
-    background:var(--stone) linear-gradient(180deg,var(--stone-hi),var(--stone) 340px)}
-  .wrap{max-width:860px;margin:0 auto;padding:0 22px}
-  .eyebrow{font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gilt);font-weight:700}
-  a{color:var(--gilt)}
-  button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--gilt);outline-offset:2px}
-  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  body{background:#fff;color:var(--ink);line-height:1.55;font-size:14.5px;
+    font-family:"Segoe UI",Calibri,system-ui,-apple-system,Arial,sans-serif}
+  .wrap{max-width:880px;margin:0 auto;padding:0 26px}
+  a{color:var(--green)}
+  button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  .mono{font-family:Consolas,ui-monospace,Menlo,monospace}
 
-  /* engraved-into-stone type: display sizes only, small text stays crisp */
-  section h2,.ded p:first-child{
-    text-shadow:0 1px 0 rgba(255,255,255,.55)}
+  /* ---- application chrome ---- */
+  .xl-title{background:var(--green-dk);color:#fff;font-size:12.5px;display:flex;align-items:center;
+    padding:7px 12px;gap:14px}
+  .xl-title .fn{flex:1;text-align:center;opacity:.95}
+  .xl-title .winbtn{display:flex;gap:14px;opacity:.8;font-size:11px}
+  .xl-menu{background:var(--chrome);border-bottom:1px solid var(--chrome-line);font-size:12.5px;color:#4a4a48;
+    display:flex;gap:2px;padding:4px 8px;overflow-x:auto;white-space:nowrap}
+  .xl-menu span{padding:3px 9px;border-radius:3px}
+  .xl-menu span.on{background:var(--green);color:#fff}
+  .xl-formula{display:flex;align-items:stretch;border-bottom:1px solid var(--grid);font-size:12.5px;background:#fff}
+  .xl-formula .ref{width:88px;flex:none;border-right:1px solid var(--grid);padding:5px 10px;
+    font-family:Consolas,ui-monospace,monospace;color:var(--ink)}
+  .xl-formula .fx{flex:none;width:34px;text-align:center;color:var(--muted);font-style:italic;
+    font-family:Georgia,serif;padding:5px 0;border-right:1px solid var(--grid)}
+  .xl-formula .val{flex:1;padding:5px 12px;font-family:Consolas,ui-monospace,monospace;color:var(--ink)}
+  .xl-cols{display:flex;background:#f8f9fa;border-bottom:1px solid #cfd4d9;font-size:11px;color:#5a5f64;
+    padding-left:44px}
+  .xl-cols span{flex:1;text-align:center;border-right:1px solid var(--grid);padding:3px 0;min-width:0}
 
-  header{text-align:center;padding:78px 0 60px;
-    background:linear-gradient(168deg,var(--granite-hi) 0%,var(--granite) 45%,#0e0f12 100%);
-    border-bottom:1px solid rgba(156,127,66,.5)}
-  header .eyebrow{color:var(--gilt-bright)}
-  header h1{font-size:clamp(22px,4.2vw,36px);font-weight:400;margin-top:18px;letter-spacing:.16em;text-transform:uppercase;max-width:760px;margin-left:auto;margin-right:auto;line-height:1.4;
-    color:var(--gilt-bright);text-shadow:0 1px 1px rgba(0,0,0,.8), 0 0 22px rgba(209,184,120,.18)}
-  header .sub{margin-top:16px;color:var(--granite-muted);font-style:italic;max-width:540px;margin-left:auto;margin-right:auto}
-  .hstar{width:26px;height:26px;margin:24px auto 0;display:block;fill:var(--gilt-bright)}
+  /* ---- the sheet ---- */
+  .sheet{position:relative;
+    background:
+      linear-gradient(90deg,#f8f9fa 44px,transparent 44px),
+      repeating-linear-gradient(180deg,transparent 0 27px,var(--grid) 27px 28px),
+      repeating-linear-gradient(90deg,transparent 0 103px,var(--grid) 103px 104px);
+    background-position:0 0, 44px 0, 44px 0;
+    border-left:none}
+  .sheet:before{content:"";position:absolute;top:0;bottom:0;left:44px;width:1px;background:#cfd4d9}
 
-  .ded{padding:46px 0;border-bottom:1px solid var(--line);text-align:center}
-  .ded p{max-width:600px;margin:0 auto;font-size:17.5px}
-  .ded p + p{margin-top:14px;color:var(--muted);font-size:15px}
+  header{text-align:left;padding:56px 0 34px}
+  .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700}
+  header h1{font-size:clamp(24px,4.4vw,38px);font-weight:700;letter-spacing:-.01em;line-height:1.2;
+    display:inline-block;background:#fff;border:2px solid var(--sel);padding:10px 18px 12px;margin-top:12px;
+    position:relative;box-shadow:0 2px 8px rgba(33,115,70,.15)}
+  header h1:after{content:"";position:absolute;right:-5px;bottom:-5px;width:8px;height:8px;background:var(--sel);border:1px solid #fff}
+  header .sub{margin-top:16px;color:var(--muted);font-style:italic;max-width:560px}
 
-  section{padding:50px 0;border-bottom:1px solid var(--line)}
-  section h2{font-weight:400;font-size:20px;margin:8px 0 12px;letter-spacing:.12em;text-transform:uppercase}
+  .ded{padding:10px 0 34px}
+  .ded p{max-width:640px;font-size:16px}
+  .ded p + p{margin-top:12px;color:var(--muted);font-size:14px}
+
+  section{padding:34px 0 40px}
+  section h2{font-size:19px;font-weight:700;margin:6px 0 8px}
   section p.intro{color:var(--muted);max-width:620px}
 
-  /* the wall panel: a slab within the wall */
-  .wall{margin-top:28px;position:relative;padding:52px 40px 40px;text-align:center;color:var(--granite-muted);
-    background:
-      radial-gradient(120% 70% at 28% 0%, rgba(255,255,255,.07), transparent 55%),
-      linear-gradient(168deg,var(--granite-hi) 0%,var(--granite) 50%,#0d0e11 100%);
-    border:1px solid #060708;
-    box-shadow:0 18px 40px rgba(40,40,35,.35),
-      inset 0 0 0 6px transparent, inset 0 0 0 1px rgba(209,184,120,.35);
-    outline:1px solid rgba(156,127,66,.4);outline-offset:-9px}
-  .wall h3{font-family:Georgia,serif;font-weight:400;font-size:15px;letter-spacing:.42em;color:var(--gilt-bright);text-transform:uppercase;
-    text-shadow:0 1px 1px rgba(0,0,0,.7)}
-  .goldrule{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 0}
-  .goldrule i{display:block;height:1px;width:90px;background:linear-gradient(90deg,transparent,rgba(209,184,120,.6))}
-  .goldrule i+i{background:linear-gradient(90deg,rgba(209,184,120,.6),transparent)}
-  .goldrule b{width:5px;height:5px;background:rgba(209,184,120,.75);transform:rotate(45deg)}
+  /* the roll: actual cell ranges */
+  .wall{margin-top:18px;background:rgba(255,255,255,.6);padding:8px 0 4px;text-align:left}
+  .wall h3{font-size:12px;letter-spacing:.3em;color:var(--green);text-transform:uppercase;font-weight:700}
+  .goldrule,.stars,.stonediv{display:none}
+  .stanza{margin-top:26px}
+  .stanza:first-of-type{margin-top:14px}
+  .fam{font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;font-weight:700}
+  .inscr{margin-top:8px;display:flex;flex-wrap:wrap;max-width:740px;
+    border:2px solid var(--sel);background:rgba(33,115,70,.05);width:fit-content;position:relative}
+  .inscr:after{content:"";position:absolute;right:-5px;bottom:-5px;width:8px;height:8px;background:var(--sel);border:1px solid #fff}
+  .cellname{display:block;padding:5px 14px;border-right:1px solid var(--grid);border-bottom:1px solid var(--grid);
+    font-family:Consolas,ui-monospace,monospace;font-size:14px;background:#fff;min-width:104px;text-align:center}
+  .stanza .note{margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic;max-width:600px;line-height:1.6}
+  .facts-row{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+    background:var(--grid);border:1px solid var(--grid);max-width:740px}
+  .facts-row div{background:#fff;padding:12px 14px}
+  .facts-row div b{display:block;font-size:22px;color:var(--green);font-weight:700}
+  .facts-row div span{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px;line-height:1.5}
+  .wall .foot{margin-top:22px;font-size:12.5px;color:var(--muted);font-style:italic;max-width:620px;line-height:1.6}
 
-  .stars{margin:32px auto 4px;max-width:320px;display:flex;flex-wrap:wrap;justify-content:center;gap:9px 18px;
-    color:var(--gilt-bright);font-size:19px;line-height:1;
-    text-shadow:0 1px 1px rgba(0,0,0,.7), 0 0 14px rgba(209,184,120,.3)}
+  /* the checker: a dialog box */
+  .checker{margin-top:20px;background:var(--chrome);border:1px solid #c7c5c0;max-width:640px;
+    box-shadow:0 12px 34px rgba(0,0,0,.18);padding:0}
+  .checker:before{content:"Paste Special\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00d7";
+    display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid var(--chrome-line);
+    padding:8px 12px;font-size:12.5px;font-weight:600;color:var(--ink)}
+  .checker label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    margin:16px 18px 6px;font-weight:700}
+  .row{display:flex;gap:10px;flex-wrap:wrap;padding:0 18px 18px}
+  input[type=text]{flex:1;min-width:200px;font-family:Consolas,ui-monospace,monospace;font-size:15px;padding:8px 11px;
+    background:#fff;border:1px solid #adadad;color:var(--ink)}
+  button{font-family:inherit;font-size:13px;font-weight:600;background:var(--green);color:#fff;border:1px solid var(--green-dk);
+    padding:8px 22px;cursor:pointer}
+  button:hover{background:#1d6a40}
+  .fate-card{margin:0 18px 18px;padding:14px;border:1px solid var(--chrome-line);border-left:4px solid;display:none;background:#fff;font-size:14px}
+  .fate-card.safe{border-left-color:var(--safe);display:block}
+  .fate-card.lost{border-left-color:var(--lost);display:block}
+  .fate-card b{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}
+  .fate-card.lost b{color:var(--lost)}
+  .fate-card.safe b{color:var(--safe)}
+  .fate-card .as{font-size:20px;margin:6px 0;font-family:Consolas,ui-monospace,monospace}
+  .fate-card p{color:var(--muted);font-size:13px;font-style:italic}
 
-  .stanza{margin-top:36px}
-  .stanza:first-of-type{margin-top:30px}
-  .fam{font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.3em;color:var(--granite-muted);text-transform:uppercase}
-  .inscr{margin-top:13px;font-size:17px;letter-spacing:.16em;line-height:2;color:var(--gilt-bright);
-    text-shadow:0 1px 1px rgba(0,0,0,.75), 0 0 16px rgba(209,184,120,.22)}
-  .inscr span{color:rgba(209,184,120,.4);padding:0 .1em}
-  .stanza .note{margin-top:11px;font-size:12.5px;color:var(--granite-muted);font-style:italic;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.65}
-  .stonediv{margin:34px auto 0;width:130px;height:1px;background:linear-gradient(90deg,transparent,rgba(156,127,66,.35),transparent)}
-  .facts-row{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px 10px;padding-top:28px;border-top:1px solid rgba(156,127,66,.3)}
-  .facts-row div b{display:block;font-size:23px;color:var(--gilt-bright);font-family:Georgia,serif;
-    text-shadow:0 1px 1px rgba(0,0,0,.7)}
-  .facts-row div span{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--granite-muted);margin-top:6px;line-height:1.5}
-  .wall .foot{margin-top:30px;font-size:12.5px;color:var(--granite-muted);font-style:italic;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7}
-
-  /* the checker: a mounted bronze plaque */
-  .checker{margin-top:30px;background:var(--plaque);color:var(--cream);padding:30px 28px;max-width:680px;
-    border:10px solid var(--plaque-frame);outline:1px solid var(--line);
-    box-shadow:0 16px 34px rgba(40,40,35,.35), inset 0 0 0 1px rgba(233,227,211,.35)}
-  .checker label{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#b8c0c9;margin-bottom:8px}
-  .row{display:flex;gap:10px;flex-wrap:wrap}
-  input[type=text]{flex:1;min-width:200px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:16px;padding:11px 13px;background:#1b2a3b;border:1px solid #3c4f66;color:var(--cream)}
-  button{font-family:"Helvetica Neue",Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(180deg,var(--gilt-hi),var(--gilt));color:#241c08;border:1px solid #7a6232;padding:12px 24px;cursor:pointer}
-  button:hover{background:linear-gradient(180deg,#c4a86c,var(--gilt))}
-  .fate-card{margin-top:18px;padding:18px;border-left:4px solid;display:none;background:#1b2a3b;font-size:15px}
-  .fate-card.safe{border-color:#5f9e6e;display:block}
-  .fate-card.lost{border-color:#c96a5a;display:block}
-  .fate-card b{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
-  .fate-card .as{font-size:22px;margin:6px 0}
-  .fate-card p{color:#aab3bd;font-size:13.5px;font-style:italic}
-
-  .facts p{max-width:640px;color:var(--ink);font-size:15.5px;margin-top:12px}
+  .facts p{max-width:660px;font-size:14.5px;margin-top:11px}
   .facts p:first-of-type{margin-top:0}
-  .facts .src{color:var(--muted);font-size:13px;font-style:italic}
+  .facts .src{color:var(--muted);font-size:12.5px;font-style:italic}
 
-  footer{padding:36px 0 54px;font-size:12.5px;color:var(--muted);text-align:center}
-  footer .doc{font-family:"Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;font-size:11px}
+  /* sheet tabs + footer */
+  .xl-tabs{display:flex;align-items:flex-end;gap:2px;background:var(--chrome);border-top:1px solid #cfd4d9;
+    padding:0 12px;font-size:12px;color:#4a4a48}
+  .xl-tabs span{padding:6px 16px;border:1px solid #cfd4d9;border-bottom:none;background:#e9e8e6}
+  .xl-tabs span.on{background:#fff;color:var(--green);font-weight:700;border-top:2px solid var(--green)}
+  .xl-tabs i{padding:6px 10px;font-style:normal;color:var(--muted)}
+  footer{padding:26px 0 46px;font-size:12px;color:var(--muted);background:var(--chrome)}
+  footer .doc{letter-spacing:.12em;text-transform:uppercase;font-size:10.5px;font-weight:700}
+  footer p{margin-top:8px;max-width:700px}
 
   @media (max-width:640px){
-    .wall{padding:34px 18px 28px}
-    .stars{font-size:16px;gap:7px 13px;max-width:270px}
-    .inscr{letter-spacing:.12em;font-size:15.5px}
-    header{padding:52px 0 42px}
+    .xl-cols span:nth-child(n+5){display:none}
+    .cellname{min-width:84px;padding:5px 8px;font-size:13px}
+    header{padding:40px 0 26px}
   }
-  footer p{margin-top:8px;max-width:680px;margin-left:auto;margin-right:auto}
 </style>
 </head>
 <body>
 
+<div class="xl-title" aria-hidden="true"><span>&#9639;</span><span class="fn">Memorial for the Genes Lost to Excel.xlsx &middot; Read-Only</span><span class="winbtn">&#8211; &nbsp; &#9633; &nbsp; &#10005;</span></div>
+<div class="xl-menu" aria-hidden="true"><span class="on">File</span><span>Home</span><span>Insert</span><span>Formulas</span><span>Data</span><span>Review</span><span>Remembrance</span><span>Help</span></div>
+<div class="xl-formula" aria-hidden="true"><span class="ref">B1752</span><span class="fx">fx</span><span class="val">=DATEVALUE("SEPT1")&nbsp;&nbsp;&rarr;&nbsp;&nbsp;1-Sep. It only takes one open.</span></div>
+<div class="xl-cols" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div>
+
+<div class="sheet">
+
 <header>
   <div class="wrap">
     <div class="eyebrow">Sites of Remembrance</div>
-    <svg class="hstar" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.6 L14.7 8.9 L22.5 9.2 L16.4 14 L18.5 21.5 L12 17.2 L5.5 21.5 L7.6 14 L1.5 9.2 L9.3 8.9 Z"/></svg>
     <h1>Memorial for the Genes Lost to Excel</h1>
     <div class="sub">In memory of the gene symbols converted to dates, and in honor of the scientists who, after two decades, chose the only winning move: surrender.</div>
   </div>
@@ -165,7 +191,6 @@
     <div class="wall">
       <h3>In memoriam</h3>
       <div class="goldrule" aria-hidden="true"><i></i><b></b><i></i></div>
-      <div class="stars" aria-hidden="true">&#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733;</div>
 
       <div class="stanza">
         <div class="fam">The SEPT family · fourteen symbols</div>
@@ -185,7 +210,7 @@
 
       <div class="stanza">
         <div class="fam">DEC · one symbol</div>
-        <div class="inscr">DEC1</div>
+        <div class="inscr"><span class="cellname">DEC1</span></div>
         <p class="note">Read as the first of December. The only member of its family, renamed DELEC1. It fell alone and is remembered alone.</p>
       </div>
 
@@ -230,6 +255,10 @@
   </div>
 </section>
 
+</div>
+
+<div class="xl-tabs" aria-hidden="true"><span class="on">Memorial</span><span>Sheet2</span><span>DO NOT REFORMAT</span><i>+</i></div>
+
 <footer>
   <div class="wrap">
     <div class="doc">DOC: BEI-011 · REV 1.0 / FINAL / DO NOT OPEN THIS DOCUMENT IN EXCEL</div>
@@ -243,7 +272,7 @@
 (function(){
   var MONTHS = {JAN:'January',FEB:'February',MAR:'March',APR:'April',MAY:'May',JUN:'June',JUL:'July',AUG:'August',SEP:'September',OCT:'October',NOV:'November',DEC:'December'};
 
-  function inscribe(id, arr){ document.getElementById(id).innerHTML = arr.join(' <span>·</span> '); }
+  function inscribe(id, arr){ document.getElementById(id).innerHTML = arr.map(function(n){return '<span class="cellname">'+n+'</span>';}).join(''); }
   var septNames=[], marchNames=[];
   for(var i=1;i<=14;i++) septNames.push('SEPT'+i);
   for(var j=1;j<=11;j++) marchNames.push('MARCH'+j);
