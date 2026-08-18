@@ -2,8 +2,9 @@
 <!--
   Source for /og.png (1200x630). Rendered by `make og`.
   Edit the copy here, not the PNG. Regenerate after any tagline change.
-  The domain in the footer is the production-domain placeholder; if the
-  site lands somewhere other than geneslosttoexcel.org, change it here too.
+  The card is the site in miniature: the memorial as a read-only worksheet.
+  The domain in the footer is the canonical host; if the site is promoted,
+  change it here too and re-run `make og`.
 -->
 <html>
 <head>
@@ -12,56 +13,105 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1200px; height: 630px; }
   body {
-    background: #101114;
-    color: #d9d6cd;
-    font-family: Georgia, serif;
-    display: flex; flex-direction: column; text-align: center;
+    background: #fff; color: #232629;
+    font-family: "Segoe UI", Calibri, system-ui, Arial, sans-serif;
+    display: flex; flex-direction: column;
   }
-  .mid {
-    flex: 1;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    padding: 0 80px;
+  .title {
+    background: #185c37; color: #fff; font-size: 19px;
+    display: flex; align-items: center; gap: 18px; padding: 12px 20px;
+  }
+  .title .fn { flex: 1; text-align: center; }
+  .menu {
+    background: #f5f4f2; border-bottom: 1px solid #e0deda; color: #4a4a48;
+    font-size: 18px; display: flex; gap: 4px; padding: 7px 14px;
+  }
+  .menu span { padding: 4px 12px; border-radius: 3px; }
+  .menu span.on { background: #217346; color: #fff; }
+  .formula {
+    display: flex; align-items: stretch; border-bottom: 1px solid #cfd4d9; font-size: 18px;
+  }
+  .formula .ref { width: 120px; border-right: 1px solid #e6e9ec; padding: 8px 14px;
+    font-family: Consolas, monospace; }
+  .formula .fx { width: 46px; text-align: center; color: #6a6f74; font-style: italic;
+    font-family: Georgia, serif; padding: 8px 0; border-right: 1px solid #e6e9ec; }
+  .formula .val { flex: 1; padding: 8px 16px; font-family: Consolas, monospace; }
+  .cols {
+    display: grid; grid-template-columns: 52px repeat(8, 1fr);
+    background: #f8f9fa; border-bottom: 1px solid #cfd4d9; font-size: 15px; color: #5a5f64;
+  }
+  .cols i { border-right: 1px solid #dfe3e7; }
+  .cols span { text-align: center; border-right: 1px solid #dfe3e7; padding: 5px 0; }
+  .sheet {
+    flex: 1; display: grid; grid-template-columns: 52px repeat(8, 1fr);
+    grid-auto-rows: 46px; align-items: stretch; position: relative;
+    background:
+      linear-gradient(90deg, #f8f9fa 52px, transparent 52px),
+      repeating-linear-gradient(180deg, transparent 0 45px, #e6e9ec 45px 46px);
+  }
+  .vl { position: absolute; top: 0; bottom: 0; width: 1px; background: #e6e9ec; }
+  .cell {
+    background: #fff; border: 1px solid #e6e9ec; border-top: 0;
+    display: flex; align-items: center; padding: 0 18px; position: relative; z-index: 1;
   }
   .eyebrow {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 17px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: #b3985a;
+    grid-column: 2 / -1; font-size: 16px; letter-spacing: .14em; text-transform: uppercase;
+    color: #217346; font-weight: 700; grid-row: span 1;
   }
-  .goldrule {
-    display: flex; align-items: center; gap: 14px; margin: 26px 0 34px;
+  h1 {
+    grid-column: 2 / 8; grid-row: span 2; font-size: 42px; font-weight: 700; letter-spacing: -.01em;
+    border: 3px solid #217346; box-shadow: 0 2px 8px rgba(33,115,70,.15); z-index: 3;
   }
-  .goldrule i { display: block; height: 1px; width: 150px;
-    background: linear-gradient(90deg, transparent, rgba(201,179,128,.55)); }
-  .goldrule i + i {
-    background: linear-gradient(90deg, rgba(201,179,128,.55), transparent); }
-  .goldrule b { width: 8px; height: 8px; background: rgba(201,179,128,.7);
-    transform: rotate(45deg); }
-  h1 { font-size: 66px; font-weight: 400; line-height: 1.15; max-width: 1000px; }
-  .inscr {
-    margin-top: 34px; font-size: 26px; letter-spacing: 0.18em; color: #c3ab77;
-    text-shadow: 0 -1px 0 rgba(0,0,0,.95), 0 1px 1px rgba(255,255,255,.07);
+  h1:after {
+    content: ""; position: absolute; right: -5px; bottom: -5px;
+    width: 11px; height: 11px; background: #217346; border: 1px solid #fff;
   }
-  .inscr span { color: rgba(201,179,128,.4); padding: 0 .15em; }
+  .sub { grid-column: 2 / 8; grid-row: span 1; color: #6a6f74; font-style: italic; font-size: 20px; }
+  .range {
+    grid-column: 2 / -1; grid-row: span 1; display: grid; grid-template-columns: subgrid;
+    outline: 3px solid #217346; outline-offset: -1px; position: relative; z-index: 3;
+  }
+  .range span {
+    display: flex; align-items: center; justify-content: center;
+    border-right: 1px solid #e6e9ec; border-bottom: 1px solid #e6e9ec; background: #fff;
+    font-family: Consolas, monospace; font-size: 19px;
+  }
   .foot {
-    flex: none;
-    padding: 0 72px 30px;
-    display: flex; justify-content: space-between;
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 17px; color: #8a8779;
-    text-transform: uppercase; letter-spacing: 0.14em;
+    flex: none; background: #f5f4f2; border-top: 1px solid #cfd4d9;
+    display: flex; justify-content: space-between; padding: 14px 22px;
+    font-size: 16px; color: #6a6f74; text-transform: uppercase; letter-spacing: .12em; font-weight: 700;
   }
 </style>
 </head>
 <body>
-  <div class="mid">
-    <div class="eyebrow">Sites of Remembrance</div>
-    <div class="goldrule"><i></i><b></b><i></i></div>
-    <h1>Memorial for the<br>Genes Lost to Excel</h1>
-    <p class="inscr">SEPT1 <span>&#183;</span> MARCH1 <span>&#183;</span> DEC1</p>
+  <div class="title"><span>&#9639;</span><span class="fn">Memorial for the Genes Lost to Excel.xlsx &middot; Read-Only</span><span>&#8211; &#9633; &#10005;</span></div>
+  <div class="menu"><span class="on">File</span><span>Home</span><span>Insert</span><span>Formulas</span><span>Data</span><span>Review</span><span>Remembrance</span><span>Help</span></div>
+  <div class="formula"><span class="ref">B1752</span><span class="fx">fx</span><span class="val">9/1/2020 &middot; what remains of SEPT1. No formula was involved.</span></div>
+  <div class="cols"><i></i><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div>
+
+  <div class="sheet">
+    <i class="vl" style="left:calc(52px + 1*((100% - 52px)/8) - 1px)"></i>
+    <i class="vl" style="left:calc(52px + 2*((100% - 52px)/8) - 1px)"></i>
+    <i class="vl" style="left:calc(52px + 3*((100% - 52px)/8) - 1px)"></i>
+    <i class="vl" style="left:calc(52px + 4*((100% - 52px)/8) - 1px)"></i>
+    <i class="vl" style="left:calc(52px + 5*((100% - 52px)/8) - 1px)"></i>
+    <i class="vl" style="left:calc(52px + 6*((100% - 52px)/8) - 1px)"></i>
+    <i class="vl" style="left:calc(52px + 7*((100% - 52px)/8) - 1px)"></i>
+    <i class="vl" style="left:calc(52px - 1px);background:#cfd4d9"></i>
+
+    <i style="grid-column:2/-1;grid-row:span 1"></i>
+    <div class="cell eyebrow">Sites of Remembrance</div>
+    <h1 class="cell">Memorial for the Genes Lost to Excel</h1>
+    <div class="cell sub">In memory of the gene symbols converted to dates.</div>
+    <div class="range">
+      <span>SEPT1</span><span>SEPT2</span><span>SEPT3</span><span>SEPT4</span>
+      <span>MARCH1</span><span>MARCH2</span><span>MARCH3</span><span>DEC1</span>
+    </div>
   </div>
+
   <div class="foot">
     <span>DOC: BEI-011</span>
-    <span>GENESLOSTTOEXCEL.ORG</span>
+    <span>GENESLOSTTOEXCEL.PAGES.DEV</span>
     <span>Lest we forget, or reformat</span>
   </div>
 </body>
