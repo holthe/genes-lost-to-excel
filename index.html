@@ -70,21 +70,22 @@
   .xl-cols span{text-align:center;border-right:1px solid #dfe3e7;padding:3px 0;min-width:0}
 
   /* ---- the sheet: a real grid; cells are the content ---- */
-  .sheet{display:grid;grid-template-columns:var(--gut) repeat(8,minmax(0,1fr));
-    align-items:start;
+  .sheet{--ncols:8;display:grid;grid-template-columns:var(--gut) repeat(8,minmax(0,1fr));
+    align-items:start;position:relative;
     background:
       linear-gradient(90deg,#f8f9fa var(--gut),transparent var(--gut)),
-      repeating-linear-gradient(180deg,transparent 0 27px,var(--grid) 27px 28px),
-      repeating-linear-gradient(90deg,transparent 0 calc(12.5% - 6.375px),var(--grid) calc(12.5% - 6.375px) calc(12.5% - 5.5px));
-    background-position:0 0, 0 0, var(--gut) 0;
+      repeating-linear-gradient(180deg,transparent 0 27px,var(--grid) 27px 28px);
     padding-bottom:56px}
-  .sheet:before{content:"";grid-column:1;grid-row:1/1;height:1px}
+  .sheet > .vl{position:absolute;top:0;bottom:0;width:1px;pointer-events:none;background:var(--grid);
+    left:calc(var(--gut) + var(--k)*((100% - var(--gut))/var(--ncols)) - 1px)}
+  .sheet > .vl.vg{background:#cfd4d9;left:calc(var(--gut) - 1px)}
   .sheet>header,.sheet>.ded,.sheet>section,.sheet .wrap,.sheet .wall,.sheet .facts{display:contents}
 
   /* every content block is a cell range on the tracks */
   .sheet .eyebrow,.sheet h1,.sheet .sub,.sheet .ded p,.sheet h2,.sheet p.intro,
   .sheet .wall h3,.sheet .stanza,.sheet .facts-row,.sheet .wall .foot,.sheet .facts p{
-    background:#fff;border:1px solid var(--grid);padding:6px 16px;min-width:0}
+    background:#fff;border:1px solid var(--grid);padding:6px 16px;min-width:0;position:relative;z-index:1}
+  .checker{position:relative;z-index:1}
 
   .eyebrow{grid-column:2/5;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700;
     margin-top:56px}
@@ -155,12 +156,8 @@
 
   @media (max-width:700px){
     :root{--gut:14px}
-    .sheet{grid-template-columns:var(--gut) repeat(4,minmax(0,1fr));
-      background:
-        linear-gradient(90deg,#f8f9fa var(--gut),transparent var(--gut)),
-        repeating-linear-gradient(180deg,transparent 0 27px,var(--grid) 27px 28px),
-        repeating-linear-gradient(90deg,transparent 0 calc(25% - 4.375px),var(--grid) calc(25% - 4.375px) calc(25% - 3.5px));
-      background-position:0 0, 0 0, var(--gut) 0}
+    .sheet{--ncols:4;grid-template-columns:var(--gut) repeat(4,minmax(0,1fr))}
+    .sheet > .vl:nth-of-type(n+6){display:none}
     .xl-cols{grid-template-columns:var(--gut) repeat(4,minmax(0,1fr))}
     .xl-cols span:nth-child(n+6){display:none}
     .sheet .eyebrow,.sheet h1,.sheet .sub,.sheet .ded p,.sheet h2,.sheet p.intro,
@@ -181,6 +178,7 @@
 <div class="xl-cols" aria-hidden="true"><i></i><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div>
 
 <div class="sheet">
+<i class="vl vg" aria-hidden="true"></i><i class="vl" style="--k:1" aria-hidden="true"></i><i class="vl" style="--k:2" aria-hidden="true"></i><i class="vl" style="--k:3" aria-hidden="true"></i><i class="vl" style="--k:4" aria-hidden="true"></i><i class="vl" style="--k:5" aria-hidden="true"></i><i class="vl" style="--k:6" aria-hidden="true"></i><i class="vl" style="--k:7" aria-hidden="true"></i><i class="vl" style="--k:8" aria-hidden="true"></i>
 
 <header>
   <div class="wrap">
