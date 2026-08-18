@@ -39,13 +39,12 @@
 <style>
   :root{
     --green:#217346; --green-dk:#185c37; --ink:#232629; --muted:#6a6f74;
-    --grid:#eaedf0; --chrome:#f5f4f2; --chrome-line:#e0deda; --sel:#217346;
-    --cell:#ffffff; --lost:#c0392b; --safe:#2e7d43;
+    --grid:#e6e9ec; --chrome:#f5f4f2; --chrome-line:#e0deda; --sel:#217346;
+    --lost:#c0392b; --safe:#2e7d43; --gut:44px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:#fff;color:var(--ink);line-height:1.55;font-size:14.5px;
     font-family:"Segoe UI",Calibri,system-ui,-apple-system,Arial,sans-serif}
-  .wrap{max-width:880px;margin:0 auto;padding:0 26px}
   a{color:var(--green)}
   button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:2px}
   .mono{font-family:Consolas,ui-monospace,Menlo,monospace}
@@ -59,70 +58,67 @@
     display:flex;gap:2px;padding:4px 8px;overflow-x:auto;white-space:nowrap}
   .xl-menu span{padding:3px 9px;border-radius:3px}
   .xl-menu span.on{background:var(--green);color:#fff}
-  .xl-formula{display:flex;align-items:stretch;border-bottom:1px solid var(--grid);font-size:12.5px;background:#fff}
+  .xl-formula{display:flex;align-items:stretch;border-bottom:1px solid #cfd4d9;font-size:12.5px;background:#fff}
   .xl-formula .ref{width:88px;flex:none;border-right:1px solid var(--grid);padding:5px 10px;
     font-family:Consolas,ui-monospace,monospace;color:var(--ink)}
   .xl-formula .fx{flex:none;width:34px;text-align:center;color:var(--muted);font-style:italic;
     font-family:Georgia,serif;padding:5px 0;border-right:1px solid var(--grid)}
-  .xl-formula .val{flex:1;padding:5px 12px;font-family:Consolas,ui-monospace,monospace;color:var(--ink)}
-  .xl-cols{display:flex;background:#f8f9fa;border-bottom:1px solid #cfd4d9;font-size:11px;color:#5a5f64;
-    padding-left:44px}
-  .xl-cols span{flex:1;text-align:center;border-right:1px solid var(--grid);padding:3px 0;min-width:0}
+  .xl-formula .val{flex:1;padding:5px 12px;font-family:Consolas,ui-monospace,monospace;color:var(--ink);overflow-x:auto;white-space:nowrap}
+  .xl-cols{display:grid;grid-template-columns:var(--gut) repeat(8,minmax(0,1fr));
+    background:#f8f9fa;border-bottom:1px solid #cfd4d9;font-size:11px;color:#5a5f64}
+  .xl-cols i{border-right:1px solid #dfe3e7;font-style:normal}
+  .xl-cols span{text-align:center;border-right:1px solid #dfe3e7;padding:3px 0;min-width:0}
 
-  /* ---- the sheet ---- */
-  .sheet{position:relative;
+  /* ---- the sheet: a real grid; cells are the content ---- */
+  .sheet{display:grid;grid-template-columns:var(--gut) repeat(8,minmax(0,1fr));
+    align-items:start;
     background:
-      linear-gradient(90deg,#f8f9fa 44px,transparent 44px),
+      linear-gradient(90deg,#f8f9fa var(--gut),transparent var(--gut)),
       repeating-linear-gradient(180deg,transparent 0 27px,var(--grid) 27px 28px),
-      repeating-linear-gradient(90deg,transparent 0 103px,var(--grid) 103px 104px);
-    background-position:0 0, 44px 0, 44px 0;
-    border-left:none}
-  .sheet:before{content:"";position:absolute;top:0;bottom:0;left:44px;width:1px;background:#cfd4d9}
+      repeating-linear-gradient(90deg,transparent 0 calc(12.5% - 6.375px),var(--grid) calc(12.5% - 6.375px) calc(12.5% - 5.5px));
+    background-position:0 0, 0 0, var(--gut) 0;
+    padding-bottom:56px}
+  .sheet:before{content:"";grid-column:1;grid-row:1/1;height:1px}
+  .sheet>header,.sheet>.ded,.sheet>section,.sheet .wrap,.sheet .wall,.sheet .facts{display:contents}
 
-  header{text-align:left;padding:56px 0 34px}
-  .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700;
-    display:inline-block;background:#fff;padding:2px 8px;margin-left:-8px}
-  .cellfill{background:#fff;padding:2px 8px;margin-left:-8px}
-  header h1{font-size:clamp(24px,4.4vw,38px);font-weight:700;letter-spacing:-.01em;line-height:1.2;
-    display:inline-block;background:#fff;border:2px solid var(--sel);padding:10px 18px 12px;margin-top:12px;
-    position:relative;box-shadow:0 2px 8px rgba(33,115,70,.15)}
+  /* every content block is a cell range on the tracks */
+  .sheet .eyebrow,.sheet h1,.sheet .sub,.sheet .ded p,.sheet h2,.sheet p.intro,
+  .sheet .wall h3,.sheet .stanza,.sheet .facts-row,.sheet .wall .foot,.sheet .facts p{
+    background:#fff;border:1px solid var(--grid);padding:6px 16px;min-width:0}
+
+  .eyebrow{grid-column:2/5;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);font-weight:700;
+    margin-top:56px}
+  header h1{grid-column:2/8;justify-self:start;font-size:clamp(22px,4vw,34px);font-weight:700;letter-spacing:-.01em;line-height:1.25;
+    border:2px solid var(--sel);padding:10px 18px 12px;position:relative;box-shadow:0 2px 8px rgba(33,115,70,.15)}
   header h1:after{content:"";position:absolute;right:-5px;bottom:-5px;width:8px;height:8px;background:var(--sel);border:1px solid #fff}
-  header .sub{margin-top:16px;color:var(--muted);font-style:italic;max-width:560px;background:#fff;padding:4px 8px;margin-left:-8px}
+  header .sub{grid-column:2/7;color:var(--muted);font-style:italic}
 
-  .ded{padding:10px 0 34px}
-  .ded p{max-width:640px;font-size:16px;background:#fff;padding:4px 8px;margin-left:-8px}
-  .ded p + p{margin-top:12px;color:var(--muted);font-size:14px}
+  .ded p{grid-column:2/8;font-size:15.5px}
+  .ded p + p{color:var(--muted);font-size:14px}
 
-  section{padding:34px 0 40px}
-  section h2{font-size:19px;font-weight:700;margin:6px 0 8px;width:fit-content;background:#fff;padding:2px 10px 2px 8px;margin-left:-8px}
-  section p.intro{color:var(--muted);max-width:620px;background:#fff;padding:4px 8px;margin-left:-8px}
+  section h2{grid-column:2/6;font-size:19px;font-weight:700}
+  section .eyebrow{margin-top:56px}
+  section p.intro{grid-column:2/7;color:var(--muted)}
 
-  /* the roll: actual cell ranges */
-  .wall{margin-top:18px;background:rgba(255,255,255,.6);padding:8px 0 4px;text-align:left}
-  .wall h3{font-size:12px;letter-spacing:.3em;color:var(--green);text-transform:uppercase;font-weight:700;
-    width:fit-content;background:#fff;padding:2px 10px 2px 8px;margin-left:-8px}
   .goldrule,.stars,.stonediv{display:none}
-  .stanza{margin-top:26px}
-  .stanza:first-of-type{margin-top:14px}
-  .fam{font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;font-weight:700;
-    width:fit-content;background:#fff;padding:2px 10px 2px 8px;margin-left:-8px}
-  .inscr{margin-top:8px;display:flex;flex-wrap:wrap;max-width:740px;
-    border:2px solid var(--sel);background:rgba(33,115,70,.05);width:fit-content;position:relative}
+  .wall h3{grid-column:2/5;font-size:12px;letter-spacing:.3em;color:var(--green);text-transform:uppercase;font-weight:700;margin-top:28px}
+  .stanza{grid-column:2/9;padding:14px 16px 16px}
+  .fam{font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;font-weight:700}
+  .inscr{margin-top:10px;display:flex;flex-wrap:wrap;border:2px solid var(--sel);background:rgba(33,115,70,.05);
+    width:fit-content;max-width:100%;position:relative}
   .inscr:after{content:"";position:absolute;right:-5px;bottom:-5px;width:8px;height:8px;background:var(--sel);border:1px solid #fff}
   .cellname{display:block;padding:5px 14px;border-right:1px solid var(--grid);border-bottom:1px solid var(--grid);
     font-family:Consolas,ui-monospace,monospace;font-size:14px;background:#fff;min-width:104px;text-align:center}
-  .stanza .note{margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic;max-width:600px;line-height:1.6;
-    background:#fff;padding:4px 8px;margin-left:-8px}
-  .facts-row{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
-    background:var(--grid);border:1px solid var(--grid);max-width:740px}
-  .facts-row div{background:#fff;padding:12px 14px}
+  .stanza .note{margin-top:10px;font-size:12.5px;color:var(--muted);font-style:italic;max-width:640px;line-height:1.6}
+  .facts-row{grid-column:2/9;margin-top:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:0;background:#fff}
+  .facts-row div{padding:12px 16px;border-right:1px solid var(--grid)}
+  .facts-row div:last-child{border-right:0}
   .facts-row div b{display:block;font-size:22px;color:var(--green);font-weight:700}
   .facts-row div span{display:block;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px;line-height:1.5}
-  .wall .foot{margin-top:22px;font-size:12.5px;color:var(--muted);font-style:italic;max-width:620px;line-height:1.6;
-    background:#fff;padding:4px 8px;margin-left:-8px}
+  .wall .foot{grid-column:2/8;font-size:12.5px;color:var(--muted);font-style:italic;line-height:1.6}
 
-  /* the checker: a dialog box */
-  .checker{margin-top:20px;background:var(--chrome);border:1px solid #c7c5c0;max-width:640px;
+  /* the checker: a floating dialog, deliberately off-grid */
+  .checker{grid-column:2/7;justify-self:start;min-width:min(100%,560px);margin:20px 0 40px;background:var(--chrome);border:1px solid #c7c5c0;
     box-shadow:0 12px 34px rgba(0,0,0,.18);padding:0}
   .checker:before{content:"Paste Special\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00d7";
     display:flex;justify-content:space-between;background:#fff;border-bottom:1px solid var(--chrome-line);
@@ -144,8 +140,7 @@
   .fate-card .as{font-size:20px;margin:6px 0;font-family:Consolas,ui-monospace,monospace}
   .fate-card p{color:var(--muted);font-size:13px;font-style:italic}
 
-  .facts p{max-width:660px;font-size:14.5px;margin-top:11px;background:#fff;padding:4px 8px;margin-left:-8px}
-  .facts p:first-of-type{margin-top:0}
+  .facts p{grid-column:2/8;font-size:14.5px}
   .facts .src{color:var(--muted);font-size:12.5px;font-style:italic}
 
   /* sheet tabs + footer */
@@ -154,20 +149,27 @@
   .xl-tabs span{padding:6px 16px;border:1px solid #cfd4d9;border-bottom:none;background:#e9e8e6}
   .xl-tabs span.on{background:#fff;color:var(--green);font-weight:700;border-top:2px solid var(--green)}
   .xl-tabs i{padding:6px 10px;font-style:normal;color:var(--muted)}
-  footer{padding:26px 0 46px;font-size:12px;color:var(--muted);background:var(--chrome)}
+  footer{padding:26px 26px 46px;font-size:12px;color:var(--muted);background:var(--chrome)}
   footer .doc{letter-spacing:.12em;text-transform:uppercase;font-size:10.5px;font-weight:700}
   footer p{margin-top:8px;max-width:700px}
 
-  @media (max-width:640px){
-    .sheet{background:
-      linear-gradient(90deg,#f8f9fa 14px,transparent 14px),
-      repeating-linear-gradient(180deg,transparent 0 27px,var(--grid) 27px 28px),
-      repeating-linear-gradient(90deg,transparent 0 103px,var(--grid) 103px 104px)}
-    .sheet:before{left:14px}
-    .xl-cols{padding-left:14px}
-    .xl-cols span:nth-child(n+5){display:none}
+  @media (max-width:700px){
+    :root{--gut:14px}
+    .sheet{grid-template-columns:var(--gut) repeat(4,minmax(0,1fr));
+      background:
+        linear-gradient(90deg,#f8f9fa var(--gut),transparent var(--gut)),
+        repeating-linear-gradient(180deg,transparent 0 27px,var(--grid) 27px 28px),
+        repeating-linear-gradient(90deg,transparent 0 calc(25% - 4.375px),var(--grid) calc(25% - 4.375px) calc(25% - 3.5px));
+      background-position:0 0, 0 0, var(--gut) 0}
+    .xl-cols{grid-template-columns:var(--gut) repeat(4,minmax(0,1fr))}
+    .xl-cols span:nth-child(n+6){display:none}
+    .sheet .eyebrow,.sheet h1,.sheet .sub,.sheet .ded p,.sheet h2,.sheet p.intro,
+    .sheet .wall h3,.sheet .stanza,.sheet .facts-row,.sheet .wall .foot,.sheet .facts p,.checker{grid-column:2/-1}
+    .eyebrow,section .eyebrow{margin-top:40px}
+    .facts-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .facts-row div:nth-child(2n){border-right:0}
+    .facts-row div{border-bottom:1px solid var(--grid)}
     .cellname{min-width:84px;padding:5px 8px;font-size:13px}
-    header{padding:40px 0 26px}
   }
 </style>
 </head>
@@ -176,7 +178,7 @@
 <div class="xl-title" aria-hidden="true"><span>&#9639;</span><span class="fn">Memorial for the Genes Lost to Excel.xlsx &middot; Read-Only</span><span class="winbtn">&#8211; &nbsp; &#9633; &nbsp; &#10005;</span></div>
 <div class="xl-menu" aria-hidden="true"><span class="on">File</span><span>Home</span><span>Insert</span><span>Formulas</span><span>Data</span><span>Review</span><span>Remembrance</span><span>Help</span></div>
 <div class="xl-formula" aria-hidden="true"><span class="ref">B1752</span><span class="fx">fx</span><span class="val">=DATEVALUE("SEPT1")&nbsp;&nbsp;&rarr;&nbsp;&nbsp;1-Sep. It only takes one open.</span></div>
-<div class="xl-cols" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div>
+<div class="xl-cols" aria-hidden="true"><i></i><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span><span>H</span></div>
 
 <div class="sheet">
 
