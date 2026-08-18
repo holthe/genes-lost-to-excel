@@ -41,6 +41,7 @@
     --stone:#e2ded4; --stone-hi:#eae7df; --ink:#3d4249; --engrave:#575c63;
     --gilt:#9c7f42; --gilt-hi:#b5985c; --muted:#767b80; --line:#c2bcab;
     --plaque:#253649; --plaque-frame:#ece6d6; --cream:#e9e3d3;
+    --granite:#131417; --granite-hi:#1e2025; --gilt-bright:#d1b878; --granite-muted:#93907f;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{color:var(--ink);font-family:Georgia,"Times New Roman",serif;line-height:1.65;
@@ -52,13 +53,17 @@
   .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
 
   /* engraved-into-stone type: display sizes only, small text stays crisp */
-  header h1,section h2,.wall h3,.ded p:first-child{
+  section h2,.ded p:first-child{
     text-shadow:0 1px 0 rgba(255,255,255,.55)}
 
-  header{text-align:center;padding:72px 0 54px;border-bottom:1px solid var(--line)}
-  header h1{font-size:clamp(22px,4.2vw,36px);font-weight:400;margin-top:18px;letter-spacing:.14em;text-transform:uppercase;max-width:760px;margin-left:auto;margin-right:auto;line-height:1.35}
-  header .sub{margin-top:14px;color:var(--muted);font-style:italic;max-width:540px;margin-left:auto;margin-right:auto}
-  .hstar{width:26px;height:26px;margin:22px auto 0;display:block;fill:var(--gilt)}
+  header{text-align:center;padding:78px 0 60px;
+    background:linear-gradient(168deg,var(--granite-hi) 0%,var(--granite) 45%,#0e0f12 100%);
+    border-bottom:1px solid rgba(156,127,66,.5)}
+  header .eyebrow{color:var(--gilt-bright)}
+  header h1{font-size:clamp(22px,4.2vw,36px);font-weight:400;margin-top:18px;letter-spacing:.16em;text-transform:uppercase;max-width:760px;margin-left:auto;margin-right:auto;line-height:1.4;
+    color:var(--gilt-bright);text-shadow:0 1px 1px rgba(0,0,0,.8), 0 0 22px rgba(209,184,120,.18)}
+  header .sub{margin-top:16px;color:var(--granite-muted);font-style:italic;max-width:540px;margin-left:auto;margin-right:auto}
+  .hstar{width:26px;height:26px;margin:24px auto 0;display:block;fill:var(--gilt-bright)}
 
   .ded{padding:46px 0;border-bottom:1px solid var(--line);text-align:center}
   .ded p{max-width:600px;margin:0 auto;font-size:17.5px}
@@ -69,31 +74,38 @@
   section p.intro{color:var(--muted);max-width:620px}
 
   /* the wall panel: a slab within the wall */
-  .wall{margin-top:28px;position:relative;padding:48px 40px 38px;text-align:center;
-    background:var(--stone-hi);border:1px solid var(--line);
-    box-shadow:inset 0 1px 4px rgba(0,0,0,.08), inset 0 0 0 6px var(--stone-hi), inset 0 0 0 7px var(--line)}
-  .wall h3{font-family:Georgia,serif;font-weight:400;font-size:15px;letter-spacing:.42em;color:var(--ink);text-transform:uppercase}
+  .wall{margin-top:28px;position:relative;padding:52px 40px 40px;text-align:center;color:var(--granite-muted);
+    background:
+      radial-gradient(120% 70% at 28% 0%, rgba(255,255,255,.07), transparent 55%),
+      linear-gradient(168deg,var(--granite-hi) 0%,var(--granite) 50%,#0d0e11 100%);
+    border:1px solid #060708;
+    box-shadow:0 18px 40px rgba(40,40,35,.35),
+      inset 0 0 0 6px transparent, inset 0 0 0 1px rgba(209,184,120,.35);
+    outline:1px solid rgba(156,127,66,.4);outline-offset:-9px}
+  .wall h3{font-family:Georgia,serif;font-weight:400;font-size:15px;letter-spacing:.42em;color:var(--gilt-bright);text-transform:uppercase;
+    text-shadow:0 1px 1px rgba(0,0,0,.7)}
   .goldrule{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 0}
-  .goldrule i{display:block;height:1px;width:90px;background:linear-gradient(90deg,transparent,rgba(156,127,66,.55))}
-  .goldrule i+i{background:linear-gradient(90deg,rgba(156,127,66,.55),transparent)}
-  .goldrule b{width:5px;height:5px;background:rgba(156,127,66,.7);transform:rotate(45deg)}
+  .goldrule i{display:block;height:1px;width:90px;background:linear-gradient(90deg,transparent,rgba(209,184,120,.6))}
+  .goldrule i+i{background:linear-gradient(90deg,rgba(209,184,120,.6),transparent)}
+  .goldrule b{width:5px;height:5px;background:rgba(209,184,120,.75);transform:rotate(45deg)}
 
-  .stars{margin:30px auto 4px;max-width:320px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;
-    color:var(--gilt);font-size:19px;line-height:1;text-shadow:0 -1px 0 rgba(0,0,0,.18), 0 1px 0 rgba(255,255,255,.5)}
+  .stars{margin:32px auto 4px;max-width:320px;display:flex;flex-wrap:wrap;justify-content:center;gap:9px 18px;
+    color:var(--gilt-bright);font-size:19px;line-height:1;
+    text-shadow:0 1px 1px rgba(0,0,0,.7), 0 0 14px rgba(209,184,120,.3)}
 
   .stanza{margin-top:36px}
   .stanza:first-of-type{margin-top:30px}
-  .fam{font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.3em;color:var(--muted);text-transform:uppercase}
-  .inscr{margin-top:13px;font-size:17px;letter-spacing:.16em;line-height:2;color:var(--gilt);
-    text-shadow:0 -1px 0 rgba(0,0,0,.22), 0 1px 0 rgba(255,255,255,.55)}
-  .inscr span{color:rgba(156,127,66,.45);padding:0 .1em}
-  .stanza .note{margin-top:11px;font-size:12.5px;color:var(--muted);font-style:italic;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.65}
+  .fam{font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.3em;color:var(--granite-muted);text-transform:uppercase}
+  .inscr{margin-top:13px;font-size:17px;letter-spacing:.16em;line-height:2;color:var(--gilt-bright);
+    text-shadow:0 1px 1px rgba(0,0,0,.75), 0 0 16px rgba(209,184,120,.22)}
+  .inscr span{color:rgba(209,184,120,.4);padding:0 .1em}
+  .stanza .note{margin-top:11px;font-size:12.5px;color:var(--granite-muted);font-style:italic;max-width:540px;margin-left:auto;margin-right:auto;line-height:1.65}
   .stonediv{margin:34px auto 0;width:130px;height:1px;background:linear-gradient(90deg,transparent,rgba(156,127,66,.35),transparent)}
-  .facts-row{margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px 10px;padding-top:28px;border-top:1px solid var(--line)}
-  .facts-row div b{display:block;font-size:23px;color:var(--gilt);font-family:Georgia,serif;
-    text-shadow:0 -1px 0 rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.5)}
-  .facts-row div span{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:6px;line-height:1.5}
-  .wall .foot{margin-top:30px;font-size:12.5px;color:var(--muted);font-style:italic;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7}
+  .facts-row{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px 10px;padding-top:28px;border-top:1px solid rgba(156,127,66,.3)}
+  .facts-row div b{display:block;font-size:23px;color:var(--gilt-bright);font-family:Georgia,serif;
+    text-shadow:0 1px 1px rgba(0,0,0,.7)}
+  .facts-row div span{display:block;font-family:"Helvetica Neue",Arial,sans-serif;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--granite-muted);margin-top:6px;line-height:1.5}
+  .wall .foot{margin-top:30px;font-size:12.5px;color:var(--granite-muted);font-style:italic;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7}
 
   /* the checker: a mounted bronze plaque */
   .checker{margin-top:30px;background:var(--plaque);color:var(--cream);padding:30px 28px;max-width:680px;
