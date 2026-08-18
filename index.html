@@ -43,7 +43,7 @@
     --lost:#c0392b; --safe:#2e7d43; --gut:44px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#fff;color:var(--ink);line-height:1.55;font-size:14.5px;
+  body{background:#fff;color:var(--ink);line-height:1.55;font-size:14.5px;overflow-x:hidden;
     font-family:"Segoe UI",Calibri,system-ui,-apple-system,Arial,sans-serif}
   a{color:var(--green)}
   button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--green);outline-offset:2px}
@@ -77,6 +77,8 @@
       repeating-linear-gradient(180deg,transparent 0 27px,var(--grid) 27px 28px);
     padding-bottom:56px}
   .sheet.lattice{grid-auto-rows:var(--row)}
+  .sheet .sp{grid-column:2/-1;pointer-events:none}
+  .sheet .nogap{margin-top:0}
   .sheet > .vl{position:absolute;top:0;bottom:0;width:1px;pointer-events:none;background:var(--grid);
     left:calc(var(--gut) + var(--k)*((100% - var(--gut))/var(--ncols)) - 1px)}
   .sheet > .vl.vg{background:#cfd4d9;left:calc(var(--gut) - 1px)}
@@ -306,6 +308,25 @@
   ));
   function lay(){
     sheet.classList.add('lattice');
+    /* Turn the blocks' top margins into real empty rows: a margin leaves a gap
+       that the block's own white box can grow into, which cuts the column
+       rules short. A transparent spacer cannot. */
+    Array.prototype.forEach.call(sheet.querySelectorAll('.sp'), function(sp){
+      sp.parentNode.removeChild(sp);
+    });
+    items.forEach(function(el){
+      if (el.dataset.gap === undefined) {
+        el.dataset.gap = String(parseFloat(getComputedStyle(el).marginTop) || 0);
+      }
+      el.classList.add('nogap');
+      var rows = Math.round(parseFloat(el.dataset.gap) / R);
+      if (rows > 0) {
+        var sp = document.createElement('i');
+        sp.className = 'sp';
+        sp.style.gridRow = 'span ' + rows;
+        el.parentNode.insertBefore(sp, el);
+      }
+    });
     /* Measure each block at its natural height: give it a row area far larger
        than it needs and stop it stretching, so the box reports its own size.
        Then snap it back to a whole number of rows. */
