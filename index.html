@@ -51,12 +51,12 @@
   button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--gilt);outline-offset:2px}
   .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
 
-  /* engraved-into-stone type */
-  header h1,section h2,.ded p,.wall h3,.fam,.stanza .note,.facts p,footer p,section p.intro{
+  /* engraved-into-stone type: display sizes only, small text stays crisp */
+  header h1,section h2,.wall h3,.ded p:first-child{
     text-shadow:0 1px 0 rgba(255,255,255,.55)}
 
   header{text-align:center;padding:72px 0 54px;border-bottom:1px solid var(--line)}
-  header h1{font-size:clamp(28px,5.4vw,46px);font-weight:400;margin-top:16px;letter-spacing:.02em}
+  header h1{font-size:clamp(22px,4.2vw,36px);font-weight:400;margin-top:18px;letter-spacing:.14em;text-transform:uppercase;max-width:760px;margin-left:auto;margin-right:auto;line-height:1.35}
   header .sub{margin-top:14px;color:var(--muted);font-style:italic;max-width:540px;margin-left:auto;margin-right:auto}
   .hstar{width:26px;height:26px;margin:22px auto 0;display:block;fill:var(--gilt)}
 
@@ -65,7 +65,7 @@
   .ded p + p{margin-top:14px;color:var(--muted);font-size:15px}
 
   section{padding:50px 0;border-bottom:1px solid var(--line)}
-  section h2{font-weight:400;font-size:27px;margin:6px 0 10px}
+  section h2{font-weight:400;font-size:20px;margin:8px 0 12px;letter-spacing:.12em;text-transform:uppercase}
   section p.intro{color:var(--muted);max-width:620px}
 
   /* the wall panel: a slab within the wall */
@@ -78,8 +78,8 @@
   .goldrule i+i{background:linear-gradient(90deg,rgba(156,127,66,.55),transparent)}
   .goldrule b{width:5px;height:5px;background:rgba(156,127,66,.7);transform:rotate(45deg)}
 
-  .stars{margin:30px auto 4px;max-width:400px;line-height:1.9;letter-spacing:.55em;text-indent:.55em;
-    color:var(--gilt);font-size:19px;text-shadow:0 -1px 0 rgba(0,0,0,.18), 0 1px 0 rgba(255,255,255,.5)}
+  .stars{margin:30px auto 4px;max-width:320px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;
+    color:var(--gilt);font-size:19px;line-height:1;text-shadow:0 -1px 0 rgba(0,0,0,.18), 0 1px 0 rgba(255,255,255,.5)}
 
   .stanza{margin-top:36px}
   .stanza:first-of-type{margin-top:30px}
@@ -115,9 +115,16 @@
   .facts p:first-of-type{margin-top:0}
   .facts .src{color:var(--muted);font-size:13px;font-style:italic}
 
-  footer{padding:36px 0 54px;font-size:12.5px;color:var(--muted)}
+  footer{padding:36px 0 54px;font-size:12.5px;color:var(--muted);text-align:center}
   footer .doc{font-family:"Helvetica Neue",Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;font-size:11px}
-  footer p{margin-top:8px;max-width:680px}
+
+  @media (max-width:640px){
+    .wall{padding:34px 18px 28px}
+    .stars{font-size:16px;gap:7px 13px;max-width:270px}
+    .inscr{letter-spacing:.12em;font-size:15.5px}
+    header{padding:52px 0 42px}
+  }
+  footer p{margin-top:8px;max-width:680px;margin-left:auto;margin-right:auto}
 </style>
 </head>
 <body>
@@ -146,7 +153,7 @@
     <div class="wall">
       <h3>In memoriam</h3>
       <div class="goldrule" aria-hidden="true"><i></i><b></b><i></i></div>
-      <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="stars" aria-hidden="true">&#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733; &#9733;</div>
 
       <div class="stanza">
         <div class="fam">The SEPT family · fourteen symbols</div>
