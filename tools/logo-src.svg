@@ -1,16 +1,26 @@
 <!-- Source for assets/logo.svg. Text is still live here; `make logo` runs
      Inkscape with export-text-to-path so the committed logo does not depend
-     on the viewer's fonts. The wordmark is set in Georgia, which is
-     installed on this machine (see the README's font note). -->
+     on the viewer's fonts. The wordmark is the memorial as it is served:
+     a title cell, selected, on a worksheet nobody has closed since 2020. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 400" width="1240" height="400" role="img" aria-label="Memorial for the Genes Lost to Excel">
-  <rect width="1240" height="400" fill="#101114"/>
-  <text x="620" y="86" text-anchor="middle" font-family="Liberation Sans, Arial, sans-serif" font-weight="bold" font-size="20" letter-spacing="7" fill="#b3985a">SITES OF REMEMBRANCE</text>
-  <g stroke="#c9b380" stroke-opacity="0.5" stroke-width="1">
-    <line x1="420" y1="118" x2="590" y2="118"/>
-    <line x1="650" y1="118" x2="820" y2="118"/>
+  <rect width="1240" height="400" fill="#ffffff"/>
+  <rect x="0" y="0" width="1240" height="46" fill="#185c37"/>
+  <text x="620" y="31" text-anchor="middle" font-family="Liberation Sans, Arial, sans-serif" font-size="20" fill="#ffffff">Memorial for the Genes Lost to Excel.xlsx &#183; Read-Only</text>
+  <g fill="#e6e9ec">
+    <rect x="0" y="112" width="1240" height="1"/>
+    <rect x="0" y="258" width="1240" height="1"/>
+    <rect x="0" y="330" width="1240" height="1"/>
+    <rect x="150" y="46" width="1" height="354"/>
+    <rect x="1080" y="46" width="1" height="354"/>
   </g>
-  <rect x="615" y="113" width="9" height="9" transform="rotate(45 619.5 117.5)" fill="#c9b380" fill-opacity="0.65"/>
-  <text x="620" y="218" text-anchor="middle" font-family="Georgia, serif" font-size="64" fill="#d9d6cd">Memorial for the Genes Lost to Excel</text>
-  <text x="620" y="290" text-anchor="middle" font-family="Georgia, serif" font-size="30" letter-spacing="6" fill="#c3ab77">SEPT1 &#183; MARCH1 &#183; DEC1</text>
-  <text x="620" y="352" text-anchor="middle" font-family="Liberation Sans, Arial, sans-serif" font-weight="bold" font-size="19" letter-spacing="6" fill="#8a8779">LEST WE FORGET, OR REFORMAT</text>
+  <text x="64" y="96" font-family="Liberation Sans, Arial, sans-serif" font-weight="bold" font-size="17" letter-spacing="3" fill="#217346">SITES OF REMEMBRANCE</text>
+  <rect x="60" y="126" width="960" height="104" fill="#ffffff" stroke="#217346" stroke-width="5"/>
+  <text x="88" y="196" font-family="Liberation Sans, Arial, sans-serif" font-weight="bold" font-size="54" fill="#232629">Memorial for the Genes Lost to Excel</text>
+  <rect x="1012" y="222" width="16" height="16" fill="#217346" stroke="#ffffff" stroke-width="3"/>
+  <g font-family="Liberation Mono, Consolas, monospace" font-size="24" fill="#232629">
+    <text x="88" y="300">SEPT1</text>
+    <text x="268" y="300">MARCH1</text>
+    <text x="468" y="300">DEC1</text>
+  </g>
+  <text x="64" y="372" font-family="Liberation Sans, Arial, sans-serif" font-size="18" fill="#6a6f74">Lest we forget, or reformat</text>
 </svg>

@@ -12,7 +12,7 @@ INKSCAPE ?= inkscape
 # The page background, without the leading hash: an unescaped '#' in a make
 # assignment starts a comment. Icons are flattened onto it rather than kept
 # transparent, so they read the same on a light or a dark browser chrome.
-DARK := 101114
+DARK := ffffff
 
 .PHONY: help
 help: ## Show this help

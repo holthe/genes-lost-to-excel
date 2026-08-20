@@ -66,7 +66,7 @@ appears here.
 ```
 index.html            the site, wall and checker included
 404.html              catch-all, served automatically by Cloudflare Pages
-favicon.svg           icon source of truth (64px grid)
+favicon.svg           icon source of truth (64px grid): a selected cell
 favicon.ico           16/32/48, generated
 apple-touch-icon.png  180x180, generated
 og.png                1200x630 share image, generated
@@ -81,9 +81,24 @@ wrangler.toml         Cloudflare Pages configuration
 mise.toml             pins the Wrangler version used to deploy
 ```
 
-The page makes zero requests to any external domain. Body type is Georgia
-with Times New Roman and generic serif fallbacks, so there are no webfonts
-to host or wait for.
+The page makes zero requests to any external domain. Type is the system
+sans, with a monospace stack for anything that would appear in a cell, so
+there are no webfonts to host or wait for.
+
+## The design
+
+The memorial is held inside the thing that did the damage. The page is a
+read-only worksheet: application chrome at the top, a formula bar reading
+`9/1/2020 - what remains of SEPT1. No formula was involved.`, column
+letters, and a sheet whose rows are real. Every block of text occupies a
+whole number of 28px rows and every fallen symbol sits in its own cell, so
+the roll of the renamed is a selected range rather than a picture of one.
+The 27 names are cells; DEC1 is a single selected cell, because it fell
+alone. Sheet tabs at the foot read Memorial, Sheet2 and DO NOT REFORMAT.
+
+The row lattice is measured in a small inline script and re-measured on
+resize; without it the sheet falls back to rows that grow to fit, so text
+can never be clipped by a browser that skips the script.
 
 ### The production domain
 
