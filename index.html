@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="In memory of the 27 gene symbols renamed in 2020 to protect them from spreadsheet date conversion. SEPT, MARCH, and DEC1: lest we forget, or reformat.">
+<meta name="description" content="In memory of the 27 gene symbols renamed in 2020 to protect them from spreadsheet date conversion. SEPT, MARCH, MARC and DEC1: lest we forget, or reformat.">
 <meta name="robots" content="index, follow">
 
 <!-- PRODUCTION DOMAIN, hardcoded. genes.besteffortindustries.com is a candidate, not
@@ -206,7 +206,7 @@
 <div class="ded">
   <div class="wrap">
     <p>They were given names by careful committees. They carried those names in a thousand spreadsheets. And each time a file was opened, the software looked at SEPT1 and saw the first of September.</p>
-    <p>In 2020, the HUGO Gene Nomenclature Committee renamed 27 human genes to protect them. This memorial preserves what they were called before. Excel was not consulted, out of caution.</p>
+    <p>In 2020, the HUGO Gene Nomenclature Committee renamed 27 human genes to protect them, and a pseudogene that was standing too close. This memorial preserves what they were called before. Excel was not consulted, out of caution.</p>
   </div>
 </div>
 
@@ -214,7 +214,7 @@
   <div class="wrap">
     <div class="eyebrow">The Wall</div>
     <h2>Roll of the renamed</h2>
-    <p class="intro">Each entry records the fallen symbol and the date Excel believed it to be. The committee reassigned them all to conversion-proof names in the SEPTIN, MARCHF, and DELEC families, where they live quietly to this day.</p>
+    <p class="intro">Each entry records the fallen symbol and the date Excel believed it to be. The committee reassigned them all to conversion-proof names in the SEPTIN, MARCHF, MTARC and DELEC families, where they live quietly to this day.</p>
     <div class="wall">
       <h3>In memoriam</h3>
       <div class="goldrule" aria-hidden="true"><i></i><b></b><i></i></div>
@@ -236,9 +236,17 @@
       <div class="stonediv" aria-hidden="true"></div>
 
       <div class="stanza">
-        <div class="fam">DEC · one symbol</div>
+        <div class="fam">DEC &middot; one symbol</div>
         <div class="inscr solo"><span class="cellname">DEC1</span></div>
         <p class="note">Read as the first of December. The only member of its family, renamed DELEC1. It fell alone and is remembered alone.</p>
+      </div>
+
+      <div class="stonediv" aria-hidden="true"></div>
+
+      <div class="stanza">
+        <div class="fam">MARC &middot; two symbols</div>
+        <div class="inscr solo"><span class="cellname">MARC1</span><span class="cellname">MARC2</span></div>
+        <p class="note">The mitochondrial amidoxime reducing components, renamed MTARC1 and MTARC2. No spreadsheet ever mistook them for anything. They were standing next to the MARCH family when the committee arrived, and were taken with them for tidiness.</p>
       </div>
 
       <div class="facts-row">
@@ -261,10 +269,10 @@
     <div class="checker">
       <label for="geneIn">Identifier to assess</label>
       <div class="row">
-        <input type="text" id="geneIn" maxlength="40" placeholder="e.g. SEPT4, MARCH1, 2310009E13, AGER" spellcheck="false">
+        <input type="text" id="geneIn" maxlength="40" aria-describedby="fate" placeholder="e.g. SEPT4, MARCH1, 2310009E13, AGER" spellcheck="false">
         <button id="checkBtn">Consult the record</button>
       </div>
-      <div class="fate-card" id="fate"></div>
+      <div class="fate-card" id="fate" role="status" aria-live="polite"></div>
     </div>
   </div>
 </section>
@@ -275,7 +283,7 @@
     <h2>What actually happened</h2>
     <div class="facts">
       <p>This is all real. A 2016 study found gene name errors from autoconversion in about one fifth of genomics papers with supplementary Excel gene lists; a 2021 follow-up found the rate had risen to nearly a third. Identifiers like 2310009E13 fared no better, converted to scientific notation on sight.</p>
-      <p>In 2020 the nomenclature committee formally renamed the vulnerable symbols: the SEPT genes became SEPTIN, the MARCH genes became MARCHF, and DEC1 became DELEC1. It remains one of the only documented cases of humanity renaming parts of its own genome to accommodate a spreadsheet's default settings.</p>
+      <p>In 2020 the nomenclature committee formally renamed the vulnerable symbols: the SEPT genes became SEPTIN, the MARCH genes became MARCHF, MARC1 and MARC2 became MTARC1 and MTARC2, and DEC1 became DELEC1. It remains one of the only documented cases of humanity renaming parts of its own genome to accommodate a spreadsheet's default settings.</p>
       <p>Excel gained an option to disable automatic data conversion in 2023, roughly 36 years after launch. The memorial notes the response time without further comment, as further comment would be undignified in this setting.</p>
       <p class="src">Sources visitors may consult: Zeeberg et al. 2004, Ziemann et al. 2016, Abeysooriya et al. 2021, HGNC guidelines 2020. All real papers. The first one is from 2004, which is how long this took.</p>
     </div>

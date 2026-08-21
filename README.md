@@ -230,11 +230,11 @@ Until then the site is reachable at `genes.besteffortindustries.com`.
 ### Related
 
 The memorial is maintained by
-[Best Effort Industries](https://besteffortindustries.com) and is
-currently queued in that register's Schedule B under a provisional
-number. Real division numbers are assigned by the register on entry into
-service and are recorded nowhere else; this site, of all sites, knows
-what happens to identifiers that get copied into a second document.
+[Best Effort Industries](https://besteffortindustries.com) and is in
+service in that register. Division numbers are assigned by the register
+and are recorded nowhere else, including here; this site, of all sites,
+knows what happens to identifiers that get copied into a second
+document.
 
 ## License
 
